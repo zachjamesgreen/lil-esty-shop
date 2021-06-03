@@ -30,9 +30,22 @@ describe 'Merchant Items Index' do
     expect(page).to have_content("Sweaters n Things's Items")
   end
 
-  it 'lists the five most popular items'
+  it 'lists the five most popular items' do
+    expect(page).to have_content("Sweaters n Things's 5 Top-Revenue Items")
+    expect(page).to have_content("Alpaca Sweater")
+    expect(page).to have_content("Polyester Sweater")
+    expect(page).to have_content("Suede Sweater")
+    expect(page).to have_content("Leather Sweater")
+    expect(page).to have_content("Denim Sweater")
+  end
 
-  it 'each item listed has a link to its show page'
+  it 'each item listed has a link to its show page' do
+    expect(page).to have_link("Alpaca Sweater")
+    expect(page).to have_link("Polyester Sweater")
+    expect(page).to have_link("Suede Sweater")
+    expect(page).to have_link("Leather Sweater")
+    expect(page).to have_link("Denim Sweater")
+  end
 
   it 'displays total revenue generated for each item'
 end
