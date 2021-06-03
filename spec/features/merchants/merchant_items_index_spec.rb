@@ -59,4 +59,12 @@ describe 'Merchant Items Index' do
       expect(page).to have_content("Total Revenue Generated: $225,321.00")
     end
   end
+
+  it 'contains a button to enable disabled items'
+
+  it 'contains a button to disable enabled items'
+
+  it 'clicking enable changes status'
+
+  it 'clicking disable changes status'
 end
