@@ -7,6 +7,23 @@
       <a class="nav-link active" href="/merchants/<%= @merchant.id %>/items">Items</a>
     </li>
   </ul>
-  <h1><%= @merchant.name %></h1>
+  <h3><%= @merchant.name %></h3>
+  <h5>Top Customers</h5>
+  <div class="row">
+    <div class="col-4">
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Transaction Count</th>
+      </tr>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.first_name + ' ' + customer.last_name %></td>
+      <td><%= customer.trans_count %></td>
+    </tr>
+    <% end %>
+    </table>
+  </div>
+  </div>
 </div>
 
