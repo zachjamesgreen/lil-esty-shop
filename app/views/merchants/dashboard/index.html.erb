@@ -33,11 +33,13 @@
       <tr>
         <th>Item</th>
         <th>Invoice ID</th>
+        <th>Invoice Created at</th>
       </tr>
     <% @items_pending.each do |item| %>
     <tr>
       <td><%= item.name %></td>
       <td><%= link_to "#{item.invoice_id}", "/invoices/#{item.invoice_id}", :class => "nav-link", :style=>"color: rgb(59, 87, 105);" %></td>
+      <td><%= item.formatted_time %></td>
     </tr>
     <% end %>
     </table>
