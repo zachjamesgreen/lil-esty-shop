@@ -54,5 +54,10 @@ describe 'Merchant Items Index' do
     expect(current_path).to eq "/merchants/#{@merchant.id}/items/#{@item_1.id}"
   end
 
-  it 'displays total revenue generated for each item'
+  it 'displays total revenue generated for each item' do
+    within('div#top_items') do
+      expect(page).to have_content("Total Revenue Generated: $225,321.00")
+    end
+
+  end
 end
