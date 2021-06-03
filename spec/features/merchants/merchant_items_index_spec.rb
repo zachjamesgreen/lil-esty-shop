@@ -47,5 +47,12 @@ describe 'Merchant Items Index' do
     expect(page).to have_link("Denim Sweater")
   end
 
+  it 'clicking the link travels to an items show page' do
+    within('div#top_items') do
+      click_link('Alpaca Sweater')
+    end
+    expect(current_path).to eq "/merchants/#{@merchant.id}/items/#{@item_1.id}"
+  end
+
   it 'displays total revenue generated for each item'
 end
