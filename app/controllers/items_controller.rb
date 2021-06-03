@@ -1,6 +1,6 @@
-class Merchant::ItemsController < ApplicationController
+class ItemsController < ApplicationController
   def index
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
     @items = Item.where("merchant_id = #{@merchant.id}")
   end
 
