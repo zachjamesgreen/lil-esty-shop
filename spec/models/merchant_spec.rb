@@ -26,7 +26,6 @@ RSpec.describe Merchant, type: :model do
       @invoice_item_5 = InvoiceItem.create!(item_id:@item_5.id, invoice_id:@invoice_3.id, quantity: 4, unit_price: @item_1.unit_price, status: 1)
       @invoice_item_6 = InvoiceItem.create!(item_id:@item_6.id, invoice_id:@invoice_3.id, quantity: 5, unit_price: @item_1.unit_price, status: 2)
       @invoice_item_7 = InvoiceItem.create!(item_id:@item_7.id, invoice_id:@invoice_1.id, quantity: 6, unit_price: @item_1.unit_price, status: 0)
-
       @transaction_2 = @invoice_2.transactions.create!(invoice_id: @invoice_2.id, credit_card_number:'234456778901', credit_card_expiration_date: '02/08', result: 2)
       @transaction_3 = @invoice_3.transactions.create!(invoice_id: @invoice_3.id, credit_card_number:'012344567789', credit_card_expiration_date: '03/09', result: 2)
     end

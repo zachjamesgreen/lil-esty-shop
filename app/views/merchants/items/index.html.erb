@@ -1,1 +1,9 @@
-<h1>items</h1>
+<h1><%= "#{@merchant.name}'s Items" %></h1>
+
+<div id="top_items">
+  <h2><%= "#{@merchant.name}'s 5 Top-Revenue Items" %></h2>
+  <% @top_items.each do |item| %>
+  <p><%= item.name %>
+  <%= number_to_currency(item.revenue) %></p>
+  <% end %>
+</div>
