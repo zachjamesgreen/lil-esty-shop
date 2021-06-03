@@ -15,8 +15,8 @@ RSpec.describe 'merchant items index page' do
     item_4 = merchant_1.items.create!(FactoryBot.attributes_for(:item))
     item_5 = merchant_1.items.create!(FactoryBot.attributes_for(:item))
     item_6 = merchant_2.items.create!(FactoryBot.attributes_for(:item))
-    visit "merchant/#{merchant_1.id}/items"
-    
+    visit "merchants/#{merchant_1.id}/items"
+
     expect(page).to have_content(item_1.name)
     expect(page).to have_content(item_2.name)
     expect(page).to have_content(item_3.name)
