@@ -3,7 +3,10 @@ require 'rails_helper'
 describe 'Merchant Dashboard Page' do
   before(:each) do
     @merch = Merchant.create!(name:"Random Combination")
-
+    @customer1 = Customer.create(first_name: 'Al', last_name: 'Bundy')
+    @customer2 = Customer.create(first_name: 'Jamaican', last_name: 'Me Crazy')
+    @customer3 = Customer.create(first_name: 'Random', last_name: 'Task')
+    @invoice1 = 
   end
   # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
   # Then I see the name of my merchant
@@ -29,6 +32,7 @@ describe 'Merchant Dashboard Page' do
   # And next to each customer name I see the number of successful transactions they have
   # conducted with my merchant
   it 'has the top 5 customers by number successful transactions' do
+    visit "/merchants/#{@merch.id}/dashboard"
 
   end
 

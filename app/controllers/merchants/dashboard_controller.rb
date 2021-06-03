@@ -6,8 +6,8 @@ class Merchants::DashboardController < ApplicationController
     .group(:merchant_id, :id, 'transactions.result')
     .order(trans_count: :desc)
     .where('merchant_id = 10')
-    .where('transactions.result = 1')
+    .where('transactions.result = 2')
+    .limit(5)
     @items_pending = InvoiceItem.merch_not_shipped(params[:id])
-    binding.pry
   end
 end

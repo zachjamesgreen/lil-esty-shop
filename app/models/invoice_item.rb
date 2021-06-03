@@ -8,6 +8,7 @@ class InvoiceItem < ApplicationRecord
     select('invoice_items.*, merchants.id as merch_id, items.name as name, invoices.id as invoice_id')
     .joins(item: :merchant)
     .joins(:invoice)
+    .order(created_at: :asc)
     .where.not(status: 2)
     .where('merchants.id = ?', merch_id)
   end
