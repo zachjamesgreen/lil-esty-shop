@@ -7,5 +7,7 @@ class Merchants::DashboardController < ApplicationController
     .order(trans_count: :desc)
     .where('merchant_id = 10')
     .where('transactions.result = 1')
+    binding.pry
+    @items_pending = InvoiceItem.merch_not_shipped(params[:id])
   end
 end
