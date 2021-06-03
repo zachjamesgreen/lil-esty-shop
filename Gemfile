@@ -45,6 +45,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'orderly'
   gem 'shoulda-matchers'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development do

@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 describe 'Merchant Dashboard Page' do
-  before(:each) do
-    @merch = Merchant.create!(name:"Random Combination")
-
+  before(:all) do
+    # @merch = Merchant.create!(name:"Random Combination")
+    begin
+      @merch = Merchant.find_or_create_by(name: "Random Combination")
+    rescue ActiveRecord::RecordNotUnique
+      retry
+    end
   end
   # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
   # Then I see the name of my merchant

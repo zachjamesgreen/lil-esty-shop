@@ -25,9 +25,9 @@ RSpec.describe 'Admin Dashboard' do
     within '#incomplete_invoices' do
       expect(page).to have_content('Incomplete Invoices')
       expect(page).to have_selector('.incomp', count: 288)
-      expect(page).to have_content('158 Tuesday, March 06, 2012')
-      expect(page).to have_content('282 Tuesday, March 06, 2012')
-      expect(page).to have_content('240 Tuesday, March 06, 2012')
+      expect(page).to have_content('158 Tuesday, March 6, 2012')
+      expect(page).to have_content('282 Tuesday, March 6, 2012')
+      expect(page).to have_content('240 Tuesday, March 6, 2012')
       first = page.find('#invoice-158')
       second = page.find('#invoice-282')
       third = page.find('#invoice-240')
