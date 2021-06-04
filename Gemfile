@@ -45,6 +45,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'orderly'
   gem 'shoulda-matchers'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
   gem 'factory_bot_rails'
   gem 'faker'
 end

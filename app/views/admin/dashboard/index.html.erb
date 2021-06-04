@@ -11,14 +11,17 @@
       </div>
     </div>
 
-    <div class="col">
-      <h3>Incomplete Invoices</h3>
-      <div id="incomplete_invoices" class="overflow-auto">
-        <% @incomp_invoices.each do |i| %>
-          <p class="incomp" id="invoice-<%= i.id %>"><%= link_to i.id, admin_invoice_path(i.id) %> <%= i.created_at.strftime('%A, %B %d, %Y') %></p>
-        <% end %>
-      </div>
-    </div>
 
-  </div>
+<div id="top-5">
+  <%= react_component("Top5AdminDashboard", { top5: @top5 }) %>
+</div>
+
+<div id="incomplete_invoices">
+  <h1>Incomplete Invoices</h1>
+  <ul>
+    <% @incomp_invoices.each do |i| %>
+      <%= react_component("InCompleteInvoices", { invoice_id: i.id, date: i.created_at.httpdate }) %>
+    <% end %>
+  </ul>
+
 </div>
