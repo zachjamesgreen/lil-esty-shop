@@ -15,6 +15,20 @@ class Merchants::ItemsController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
+  def create
+    @merchant = Merchant.find(params[:id])
+    @item = Item.new(item_params)
+    @item.status = 0
+    @item.merchant_id = @merchant.id
+    if @item.save
+      redirect_to "/merchants/#{@merchant.id}/items"
+      flash[:alert] = "Successfully created item!"
+    else
+      flash[:error] = "Item not created, missing/incorrect information"
+      render :new
+    end
+  end
+
   def update
     @merchant = Merchant.find(params[:id])
     item = Item.find(params[:item_id])
