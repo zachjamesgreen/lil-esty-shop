@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(version: 2021_06_03_234150) do
 
   create_table "invoice_items", force: :cascade do |t|
     t.integer "quantity", default: 0
-    t.money "unit_price", scale: 2, default: "0.0"
     t.integer "status", default: 0
     t.bigint "item_id"
     t.bigint "invoice_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_price", default: 0
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
     t.index ["item_id"], name: "index_invoice_items_on_item_id"
   end
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 2021_06_03_234150) do
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.money "unit_price", scale: 2, default: "0.0"
     t.bigint "merchant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_price", default: 0
     t.integer "status", default: 1
     t.index ["merchant_id"], name: "index_items_on_merchant_id"
   end
