@@ -7,13 +7,13 @@ describe 'Merchant Items Index' do
     @invoice_1 = @customer.invoices.create!(status: 2, customer_id: @customer.id)
     @invoice_2 = @customer.invoices.create!(status: 1, customer_id: @customer.id)
     @invoice_3 = @customer.invoices.create!(status: 0, customer_id: @customer.id)
-    @item_1 = @merchant.items.create!(name: 'Alpaca Sweater', description: 'Warm and Fuzzy', unit_price: 0.75107e5, merchant_id: @merchant.id)
-    @item_2 = @merchant.items.create!(name: 'Wool Sweater', description: 'Warm and Scratchy', unit_price: 0.5107e5, merchant_id: @merchant.id)
-    @item_3 = @merchant.items.create!(name: 'Cotton Sweater', description: 'Cool and Fuzzy', unit_price: 0.17e5, merchant_id: @merchant.id)
-    @item_4 = @merchant.items.create!(name: 'Denim Sweater', description: 'Cool and Scratchy', unit_price: 0.7510e5, merchant_id: @merchant.id)
-    @item_5 = @merchant.items.create!(name: 'Leather Sweater', description: 'Warm and Sweaty', unit_price: 0.75e5, merchant_id: @merchant.id)
-    @item_6 = @merchant.items.create!(name: 'Suede Sweater', description: 'Cool and Sweaty', unit_price: 0.7522e5, merchant_id: @merchant.id)
-    @item_7 = @merchant.items.create!(name: 'Polyester Sweater', description: 'Cool and Noisy', unit_price: 0.1234e5, merchant_id: @merchant.id)
+    @item_1 = @merchant.items.create!(name: 'Alpaca Sweater', description: 'Warm and Fuzzy', unit_price: 0.75107e5, status: 1, merchant_id: @merchant.id)
+    @item_2 = @merchant.items.create!(name: 'Wool Sweater', description: 'Warm and Scratchy', unit_price: 0.5107e5, status: 1, merchant_id: @merchant.id)
+    @item_3 = @merchant.items.create!(name: 'Cotton Sweater', description: 'Cool and Fuzzy', unit_price: 0.17e5, status: 1, merchant_id: @merchant.id)
+    @item_4 = @merchant.items.create!(name: 'Denim Sweater', description: 'Cool and Scratchy', unit_price: 0.7510e5, status: 1, merchant_id: @merchant.id)
+    @item_5 = @merchant.items.create!(name: 'Leather Sweater', description: 'Warm and Sweaty', unit_price: 0.75e5, status: 1, merchant_id: @merchant.id)
+    @item_6 = @merchant.items.create!(name: 'Suede Sweater', description: 'Cool and Sweaty', unit_price: 0.7522e5, status: 1, merchant_id: @merchant.id)
+    @item_7 = @merchant.items.create!(name: 'Polyester Sweater', description: 'Cool and Noisy', unit_price: 0.1234e5, status: 1, merchant_id: @merchant.id)
     @invoice_item_1 = InvoiceItem.create!(item_id:@item_1.id, invoice_id:@invoice_1.id, quantity: 24, unit_price: @item_1.unit_price, status: 2)
     @invoice_item_2 = InvoiceItem.create!(item_id:@item_2.id, invoice_id:@invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
     @invoice_item_3 = InvoiceItem.create!(item_id:@item_3.id, invoice_id:@invoice_2.id, quantity: 2, unit_price: @item_1.unit_price, status: 2)
@@ -60,9 +60,17 @@ describe 'Merchant Items Index' do
     end
   end
 
-  it 'contains a button to enable disabled items'
+  it 'contains a button to enable disabled items' do
+    expect(page).to have_button('Disable')
+    expect(page).not_to have_button('Enable')
+  end
 
-  it 'contains a button to disable enabled items'
+  it 'contains a button to disable enabled items' do
+    item_8 = @merchant.items.create!(name: 'Fool Sweater', description: 'Ok', unit_price: 0.5107e5, status: 0, merchant_id: @merchant.id)
+    visit "/merchants/#{@merchant.id}/items"
+    expect(page).to have_button('Enable')
+    expect(page).to have_button('Disable')
+  end
 
   it 'clicking enable changes status'
 
