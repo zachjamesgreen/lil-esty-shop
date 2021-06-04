@@ -43,8 +43,8 @@ Shoulda::Matchers.configure do |config|
 end
 
 # Capybara.default_driver = :selenium
-# Capybara.default_driver = :selenium_chrome_headless
-Capybara.default_driver = :selenium_headless
+Capybara.default_driver = :selenium_chrome_headless
+# Capybara.default_driver = :selenium_headless
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
