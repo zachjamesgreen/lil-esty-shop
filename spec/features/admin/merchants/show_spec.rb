@@ -7,4 +7,11 @@ RSpec.describe 'Admin Merchant Show' do
 
     expect(page).to have_content(merchant.name)
   end
+
+  it 'has link to update merchant' do
+    merchant = Merchant.first
+    visit "/admin/merchants/#{merchant.id}"
+
+    expect(page).to have_link('Update', href: "/admin/merchants/#{merchant.id}/edit")
+  end
 end
