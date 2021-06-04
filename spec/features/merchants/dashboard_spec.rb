@@ -44,7 +44,6 @@ describe 'Merchant Dashboard Page' do
       Customer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
       n += 1
     end
-    binding.pry
   end
 
   it 'shows number of successful transactions with merchant for the top 5 customers' do
