@@ -72,7 +72,25 @@ describe 'Merchant Items Index' do
     expect(page).to have_button('Disable')
   end
 
-  it 'clicking enable changes status'
+  it 'clicking enable changes status' do 
+    merchant_2 = Merchant.create!(name: 'Sweaters n Things')
+    item = merchant_2.items.create!(name: 'Fool Sweater', description: 'Ok', unit_price: 0.5107e5, status: 1, merchant_id: @merchant.id)
+    visit "/merchants/#{merchant_2.id}/items"
 
-  it 'clicking disable changes status'
+    expect(page).not_to have_button('Enable')
+    click_button('Disable')
+    expect(current_path).to eq "/merchants/#{merchant_2.id}/items"
+    expect(page).to have_button('Enable')
+  end
+
+  it 'clicking disable changes status' do 
+    merchant_2 = Merchant.create!(name: 'Sweaters n Things')
+    item = merchant_2.items.create!(name: 'Fool Sweater', description: 'Ok', unit_price: 0.5107e5, status: 0, merchant_id: @merchant.id)
+    visit "/merchants/#{merchant_2.id}/items"
+
+    expect(page).not_to have_button('Disable')
+    click_button('Enable')
+    expect(current_path).to eq "/merchants/#{merchant_2.id}/items"
+    expect(page).to have_button('Disable')
+  end
 end
