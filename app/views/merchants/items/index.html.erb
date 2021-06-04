@@ -4,18 +4,21 @@
   <div class="row">
     <div class="col">
       <div id="all_items">
-        <% @items.each do |item| %>
-  
 
-          <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+        <h2><%= "Enabled Items" %></h2>
+        <li><% @items.each do |item| %>
           <% if item.status == 'enabled' %>
+            <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
             <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {disable: true} %>
-          <% elsif item.status == 'disabled' %>
+          <% end %>
+        <% end %></li>
+        <h2><%= "Disabled Items" %></h2>
+        <li><% @items.each do |item| %>
+          <% if item.status == 'disabled' %>
+            <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
             <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enable: true} %>
-          <% end %></li>
-
-
-        <% end %>
+          <% end %>
+        <% end %></li>
       </div>
     </div>
     <div class="col">
@@ -23,10 +26,9 @@
         <h2><%= "#{@merchant.name}'s 5 Top-Revenue Items" %></h2>
         <% @top_items.each do |item| %>
         <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%>
-        <%= "Total Revenue Generated: #{number_to_currency(item.revenue/100)}" %></p>
+          <%= "Total Revenue Generated: #{number_to_currency(item.revenue/100)}" %></p>
         <% end %>
       </div>
-  </div>
+    </div>
   </div>
 </div>
-
