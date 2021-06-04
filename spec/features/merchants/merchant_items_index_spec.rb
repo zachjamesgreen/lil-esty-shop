@@ -56,7 +56,7 @@ describe 'Merchant Items Index' do
 
   it 'displays total revenue generated for each item' do
     within('div#top_items') do
-      expect(page).to have_content("Total Revenue Generated: $225,321.00")
+      expect(page).to have_content("Total Revenue Generated: $2,253.21")
     end
   end
 

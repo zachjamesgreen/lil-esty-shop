@@ -3,22 +3,29 @@
 <div class="container">
   <div class="row">
     <div class="col">
+      <h4><%= "Create a new item for #{@merchant.name}" %></h4>
+      <%= render partial: 'form', 
+           locals: {
+                    item: @item,
+                    button_text: 'Create Item'
+           }  %>
+    </div>
+    <div class="col">
       <div id="all_items">
-
         <h2><%= "Enabled Items" %></h2>
-        <li id="enabled_items"><% @items.each do |item| %>
+        <ul id="enabled_items"><% @items.each do |item| %>
           <% if item.status == 'enabled' %>
-            <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-            <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {disable: true} %>
+          <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+          <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {disable: true} %>
           <% end %>
-        <% end %></li>
+          <% end %></ul>
         <h2><%= "Disabled Items" %></h2>
-        <li id="disabled_items"><% @items.each do |item| %>
+        <ul id="disabled_items"><% @items.each do |item| %>
           <% if item.status == 'disabled' %>
-            <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-            <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enable: true} %>
+          <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+          <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enable: true} %>
           <% end %>
-        <% end %></li>
+          <% end %></ul>
       </div>
     </div>
     <div class="col">
