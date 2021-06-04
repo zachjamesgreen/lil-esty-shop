@@ -1,1 +1,31 @@
+<div class="row">
+  <div class="col-lg-4 rounded" style="border: 2px red; padding: 15px">
+  
+    <div class="card " style="background-color: rgb(191, 202, 209);min-width: 480px">
+      <div class="card-header" style="background-color: rgb(59, 87, 105)">
+        <h4 style="padding-top: 8px; color: rgb(191, 202, 209);" class="card-title"><%= @invoice.id %> Status: <%= @invoice.status%></h4>
+        <hr
+          class="float-left"
+          style="
+            color: rgb(105, 0, 0);
+            border: 2px solid rgb(112, 0, 0);
+            width: 50%;
+          "
+        />
+        <br>
+      </div>
+      <div class="card-body" style="background-color: rgb(217, 221, 222)">
+        <!-- will eventually build as a react component for search and see pet info as modal -->
+      </div>
+      </div>
+    </div>
+  </div>
+
 <h4><%= @invoice.id %></h4>
+<h4><%= @invoice.formatted_time %></h4>
+<h4><%= @customer.first_name + ' ' + @customer.last_name %></h4>
+<% @items.each do |item| %>
+  <p><%= item.name %></p>
+  <p><%= item.quantity %></p>
+  <p><%= item.status %></p>
+<% end %>
