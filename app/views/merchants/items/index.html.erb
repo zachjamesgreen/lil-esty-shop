@@ -7,9 +7,9 @@
         <% @items.each do |item| %>
           <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
           <% if item.status == 'enabled' %>
-            <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}/activation" %>
+            <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {disable: true} %>
           <% elsif item.status == 'disabled' %>
-            <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}/activation" %>
+            <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enable: true} %>
           <% end %></li>
         <% end %>
       </div>
