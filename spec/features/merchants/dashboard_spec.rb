@@ -6,7 +6,8 @@ describe 'Merchant Dashboard Page' do
     @customer1 = Customer.create(first_name: 'Al', last_name: 'Bundy')
     @customer2 = Customer.create(first_name: 'Jamaican', last_name: 'Me Crazy')
     @customer3 = Customer.create(first_name: 'Random', last_name: 'Task')
-    @invoice1 = 
+    @invoice1 = Invoice.create!(customer_id:@customer1.id ,status: 1)
+    @invoice2 = Invoice.create!(customer_id:@customer1.id ,status: 1)
   end
   # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
   # Then I see the name of my merchant
@@ -21,8 +22,8 @@ describe 'Merchant Dashboard Page' do
   # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
   it 'has 2 links, to merchant items, and merchant invoices' do
     visit "/merchants/#{@merch.id}/dashboard"
-    expect(page).to have_content("Items")
-    expect(page).to have_content("Invoices")
+    expect(page).to have_link("Items")
+    expect(page).to have_link("Invoices")
   end
 
   #   As a merchant,
@@ -33,7 +34,17 @@ describe 'Merchant Dashboard Page' do
   # conducted with my merchant
   it 'has the top 5 customers by number successful transactions' do
     visit "/merchants/#{@merch.id}/dashboard"
-
+    n = 0 
+    while n < 3
+      Merchant.create(name: Faker::Name.name)
+      n += 1
+    end 
+    n = 0 
+    while n < 10
+      Customer.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+      n += 1
+    end
+    binding.pry
   end
 
   it 'shows number of successful transactions with merchant for the top 5 customers' do
