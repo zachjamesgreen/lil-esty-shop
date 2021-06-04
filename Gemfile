@@ -47,6 +47,8 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -64,9 +66,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'activerecord-postgres_enum'
 # gem 'autoprefixer-rails'
-gem 'factory_bot_rails'
-gem 'faker'
-# gem 'foundation-rails'
 gem 'jquery-rails'
 gem 'webpacker'
 gem 'react-rails'

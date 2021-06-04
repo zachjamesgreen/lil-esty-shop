@@ -1,12 +1,47 @@
-<div class="container">
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link active" href="/merchants/<%= @merchant.id %>/invoices">Invoices</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="/merchants/<%= @merchant.id %>/items">Items</a>
-    </li>
-  </ul>
-  <h1><%= @merchant.name %></h1>
-</div>
 
+    <div class="col-10">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="/merchants/<%= @merchant.id %>/invoices">Invoices</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/merchants/<%= @merchant.id %>/items">Items</a>
+        </li>
+      </ul>
+      <h3><%= @merchant.name %></h3>
+      <br>
+    </div>
+  <div class="row">
+    <div class="col-4">
+      <h5>Top Customers</h5>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Transaction Count</th>
+      </tr>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.first_name + ' ' + customer.last_name %></td>
+      <td><%= customer.trans_count %></td>
+    </tr>
+    <% end %>
+    </table>
+  </div>
+  <div class="col-6">
+    <h5>Items Ready to Ship</h5>
+    <table class="table">
+      <tr>
+        <th>Item</th>
+        <th>Invoice ID</th>
+        <th>Invoice Created at</th>
+      </tr>
+    <% @items_pending.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= link_to "#{item.invoice_id}", "/invoices/#{item.invoice_id}", :class => "nav-link", :style=>"color: rgb(59, 87, 105);" %></td>
+      <td><%= item.formatted_time %></td>
+    </tr>
+    <% end %>
+    </table>
+  </div>
+  </div>

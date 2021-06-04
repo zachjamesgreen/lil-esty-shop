@@ -4,7 +4,11 @@ class HelloWorld extends React.Component {
   render () {
     return (
       <React.Fragment>
-        Greeting: {this.props.greeting}
+        <div className="row">
+          <div className="col-2">
+            Greeting: {this.props.greeting}
+          </div>
+        </div>
       </React.Fragment>
     );
   }
