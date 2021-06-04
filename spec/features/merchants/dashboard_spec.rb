@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe 'Merchant Dashboard Page' do
+
+#   before(:all) do
+#     # @merch = Merchant.create!(name:"Random Combination")
+#     begin
+#       @merch = Merchant.find_or_create_by(name: "Random Combination")
+#     rescue ActiveRecord::RecordNotUnique
+#       retry
+#     end
   before(:each) do
     @merch = Merchant.create!(name:"Random Combination")
     @customer1 = Customer.create(first_name: 'Al', last_name: 'Bundy')
