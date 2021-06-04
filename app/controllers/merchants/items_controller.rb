@@ -6,12 +6,18 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:id])
+    @item = Item.find(params[:item_id])
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:id])
     @item = Item.find(params[:item_id])
   end
 
   def update
     @merchant = Merchant.find(params[:id])
-    item = Item.find(params[:item_id])
+    item = Item.find(params[:item_id])    
     if params[:enable]
       item.status = 1
       item.save
@@ -19,8 +25,16 @@ class Merchants::ItemsController < ApplicationController
     if params[:disable]
       item.status = 0
       item.save
-    end
-    @items = Item.where(merchant_id: @merchant.id)
-    redirect_to "/merchants/#{@merchant.id}/items"
+    end 
+    if item.update(item_params)
+      redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
+      flash[:alert] = "The information has been successfully updated"
+    end      
+  end
+
+  private
+
+  def item_params
+    params.permit(:name, :description, :unit_price)
   end
 end
