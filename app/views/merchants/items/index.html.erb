@@ -1,1 +1,21 @@
-<h1>items</h1>
+<h1><%= "#{@merchant.name}'s Items" %></h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% @items.each do |item| %>
+        <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %></li>
+      <% end %>
+    </div>
+    <div class="col">
+      <div id="top_items">
+        <h2><%= "#{@merchant.name}'s 5 Top-Revenue Items" %></h2>
+        <% @top_items.each do |item| %>
+        <p><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%>
+        <%= "Total Revenue Generated: #{number_to_currency(item.revenue)}" %></p>
+        <% end %>
+      </div>
+  </div>
+  </div>
+</div>
+
