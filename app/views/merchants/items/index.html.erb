@@ -6,14 +6,14 @@
       <div id="all_items">
 
         <h2><%= "Enabled Items" %></h2>
-        <li><% @items.each do |item| %>
+        <li id="enabled_items"><% @items.each do |item| %>
           <% if item.status == 'enabled' %>
             <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
             <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {disable: true} %>
           <% end %>
         <% end %></li>
         <h2><%= "Disabled Items" %></h2>
-        <li><% @items.each do |item| %>
+        <li id="disabled_items"><% @items.each do |item| %>
           <% if item.status == 'disabled' %>
             <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
             <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enable: true} %>
