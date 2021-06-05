@@ -11,4 +11,15 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:unit_price) }
   end
+  describe 'instance methods' do
+    
+    describe '#top_day' do
+      it 'returns top selling date' do
+        merchant = Merchant.find(1)
+        item = merchant.top_five.first
+
+        expect(item.top_day).is_a? Date
+      end
+    end
+  end
 end
