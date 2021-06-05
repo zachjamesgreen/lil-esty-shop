@@ -21,6 +21,8 @@ class Item < ApplicationRecord
       .first
       .created_at
       date_string.to_date
+    else
+      "Transaction Successful, but Invoices Pending/Cancelled"
     end
   end
 end
