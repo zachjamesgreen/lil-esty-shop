@@ -95,8 +95,9 @@ describe 'Merchant Items Index' do
     expect(page).to have_content('Item not created, missing/incorrect information')
   end
 
-  # it 'lists top items top day' do
-  #   expect(page).to have_content("Top selling date for Alpaca Sweater was #{Date.today}")
-  # end
+  it 'lists top items top day' do
+    visit "/merchants/#{@merchant_3.id}/items"
+    expect(page).to have_content('Top selling date for explicabo was: 2021-06-04')
+  end
 
 end
