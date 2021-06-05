@@ -22,6 +22,6 @@ RSpec.describe 'Admin Merchant Edit' do
     end
 
     expect(page).to have_current_path("/admin/merchants/#{merchant.id}")
-    expect(page).to have_content(merchant.name)
+    expect(page).to have_content('Testing 123')
   end
 end
