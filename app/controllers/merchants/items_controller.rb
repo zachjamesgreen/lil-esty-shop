@@ -32,7 +32,8 @@ class Merchants::ItemsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     item = Item.find(params[:item_id])
-    if params[:edit]
+    # require 'pry'; binding.pry
+    if params[:commit]
       if item.update(item_params)
           redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
           flash[:alert] = "The information has been successfully updated"

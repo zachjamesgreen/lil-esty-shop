@@ -19,11 +19,12 @@ RSpec.describe 'merchant items show page' do
     visit "merchants/#{merchant_1.id}/items"
 
     click_link "#{item_1.name}"
-
+    # require 'pry'; binding.pry
+    # save_and_open_page
     expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
     expect(page).to have_content(item_1.name)
     expect(page).to have_content(item_1.description)
-    expect(page).to have_content(item.unit_price)
+    expect(page).to have_content("Price: $#{(item_1.unit_price/100).round(2)}")
   end
 
   # As a merchant,
