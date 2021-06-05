@@ -19,8 +19,7 @@ RSpec.describe 'merchant items show page' do
     visit "merchants/#{merchant_1.id}/items"
 
     click_link "#{item_1.name}"
-    # require 'pry'; binding.pry
-    # save_and_open_page
+    
     expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
     expect(page).to have_content(item_1.name)
     expect(page).to have_content(item_1.description)
@@ -46,7 +45,7 @@ RSpec.describe 'merchant items show page' do
 
     fill_in 'Name',	with: 'Awesome Plundger'
     click_on 'Submit'
-    
+
     expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
     expect(page).to have_content('The information has been successfully updated')
     expect(page).to have_content('Awesome Plundger')
