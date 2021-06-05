@@ -2,96 +2,73 @@ require 'rails_helper'
 
 describe 'Merchant Items Index' do
   before :each do
-    @merchant = Merchant.create!(name: 'Sweaters n Things')
-    @customer = Customer.create!(first_name: 'Bill', last_name: 'Haynes')
-    @invoice_1 = @customer.invoices.create!(status: 2, customer_id: @customer.id)
-    @invoice_2 = @customer.invoices.create!(status: 1, customer_id: @customer.id)
-    @invoice_3 = @customer.invoices.create!(status: 0, customer_id: @customer.id)
-    @item_1 = @merchant.items.create!(name: 'Alpaca Sweater', description: 'Warm and Fuzzy', unit_price: 0.75107e5, status: 1, merchant_id: @merchant.id)
-    @item_2 = @merchant.items.create!(name: 'Wool Sweater', description: 'Warm and Scratchy', unit_price: 0.5107e5, status: 1, merchant_id: @merchant.id)
-    @item_3 = @merchant.items.create!(name: 'Cotton Sweater', description: 'Cool and Fuzzy', unit_price: 0.17e5, status: 1, merchant_id: @merchant.id)
-    @item_4 = @merchant.items.create!(name: 'Denim Sweater', description: 'Cool and Scratchy', unit_price: 0.7510e5, status: 1, merchant_id: @merchant.id)
-    @item_5 = @merchant.items.create!(name: 'Leather Sweater', description: 'Warm and Sweaty', unit_price: 0.75e5, status: 1, merchant_id: @merchant.id)
-    @item_6 = @merchant.items.create!(name: 'Suede Sweater', description: 'Cool and Sweaty', unit_price: 0.7522e5, status: 1, merchant_id: @merchant.id)
-    @item_7 = @merchant.items.create!(name: 'Polyester Sweater', description: 'Cool and Noisy', unit_price: 0.1234e5, status: 1, merchant_id: @merchant.id)
-    @invoice_item_1 = InvoiceItem.create!(item_id:@item_1.id, invoice_id:@invoice_1.id, quantity: 24, unit_price: @item_1.unit_price, status: 2)
-    @invoice_item_2 = InvoiceItem.create!(item_id:@item_2.id, invoice_id:@invoice_1.id, quantity: 1, unit_price: @item_1.unit_price, status: 2)
-    @invoice_item_3 = InvoiceItem.create!(item_id:@item_3.id, invoice_id:@invoice_2.id, quantity: 2, unit_price: @item_1.unit_price, status: 2)
-    @invoice_item_4 = InvoiceItem.create!(item_id:@item_4.id, invoice_id:@invoice_2.id, quantity: 3, unit_price: @item_1.unit_price, status: 0)
-    @invoice_item_5 = InvoiceItem.create!(item_id:@item_5.id, invoice_id:@invoice_3.id, quantity: 4, unit_price: @item_1.unit_price, status: 1)
-    @invoice_item_6 = InvoiceItem.create!(item_id:@item_6.id, invoice_id:@invoice_3.id, quantity: 5, unit_price: @item_1.unit_price, status: 2)
-    @invoice_item_7 = InvoiceItem.create!(item_id:@item_7.id, invoice_id:@invoice_1.id, quantity: 6, unit_price: @item_1.unit_price, status: 0)
-    @transaction_1 = @invoice_1.transactions.create!(invoice_id: @invoice_1.id, credit_card_number:'123445677890', credit_card_expiration_date: '02/07', result: 2) 
-    @transaction_2 = @invoice_2.transactions.create!(invoice_id: @invoice_2.id, credit_card_number:'234456778901', credit_card_expiration_date: '02/08', result: 2)
-    @transaction_3 = @invoice_3.transactions.create!(invoice_id: @invoice_3.id, credit_card_number:'012344567789', credit_card_expiration_date: '03/09', result: 2)
-    visit "/merchants/#{@merchant.id}/items"
+    @merchant_1 = Merchant.find(1)
+    @merchant_2 = Merchant.find(2)
+    @merchant_3 = Merchant.find(24)
+    @items_1 = @merchant_1.items
+    @items_2 = @merchant_2.items
+    @items_3 = @merchant_3.items
+    visit "/merchants/#{@merchant_1.id}/items"
   end
   it 'has a header' do
-    expect(page).to have_content("Sweaters n Things's Items")
+    expect(page).to have_content("Shelby's Items")
   end
 
   it 'lists the five most popular items' do
-    expect(page).to have_content("Sweaters n Things's 5 Top-Revenue Items")
-    expect(page).to have_content("Alpaca Sweater")
-    expect(page).to have_content("Polyester Sweater")
-    expect(page).to have_content("Suede Sweater")
-    expect(page).to have_content("Leather Sweater")
-    expect(page).to have_content("Denim Sweater")
+    visit "/merchants/#{@merchant_3.id}/items"
+    expect(page).to have_content("Glennis's 5 Top-Revenue Items")
+    expect(page).to have_content('Total Revenue Generated: $4.48')
   end
 
   it 'each item listed has a link to its show page' do
-    expect(page).to have_link("Alpaca Sweater")
-    expect(page).to have_link("Polyester Sweater")
-    expect(page).to have_link("Suede Sweater")
-    expect(page).to have_link("Leather Sweater")
-    expect(page).to have_link("Denim Sweater")
+    visit "/merchants/#{@merchant_3.id}/items"
+    expect(page).to have_link('explicabo')
   end
 
   it 'clicking the link travels to an items show page' do
+    visit "/merchants/#{@merchant_3.id}/items"
+    item = @items_3.last
     within('div#top_items') do
-      click_link('Alpaca Sweater')
+      click_link('explicabo')
     end
-    expect(current_path).to eq "/merchants/#{@merchant.id}/items/#{@item_1.id}"
+    expect(current_path).to eq "/merchants/#{@merchant_3.id}/items/#{item.id}"
   end
 
-  it 'displays total revenue generated for each item' do
-    within('div#top_items') do
-      expect(page).to have_content("Total Revenue Generated: $2,253.21")
-    end
-  end
-
-  it 'contains a button to enable disabled items' do
-    expect(page).to have_button('Disable')
-    expect(page).not_to have_button('Enable')
+  it 'has sections for enabled and disabled items' do
+    expect(page).to have_content 'Enabled Items'
+    expect(page).to have_content 'Disabled Items'
   end
 
   it 'contains a button to disable enabled items' do
-    item_8 = @merchant.items.create!(name: 'Fool Sweater', description: 'Ok', unit_price: 0.5107e5, status: 0, merchant_id: @merchant.id)
-    visit "/merchants/#{@merchant.id}/items"
-    expect(page).to have_button('Enable')
     expect(page).to have_button('Disable')
+    expect(page).not_to have_button('Enable')
+  end
+
+  it 'clicking disable changes status' do
+    id = @items_1.first.id
+    within("#disable-#{id}") do
+      click_button('Disable')
+    end
+
+    expect(current_path).to eq "/merchants/#{@merchant_1.id}/items"
+    expect(page).to have_button('Enable')
   end
 
   it 'clicking enable changes status' do 
-    merchant_2 = Merchant.create!(name: 'Sweaters n Things')
-    item = merchant_2.items.create!(name: 'Fool Sweater', description: 'Ok', unit_price: 0.5107e5, status: 1, merchant_id: @merchant.id)
-    visit "/merchants/#{merchant_2.id}/items"
+    id = @items_1.first.id
+    within("#disable-#{id}") do
+      click_button('Disable')
+    end
 
-    expect(page).not_to have_button('Enable')
-    click_button('Disable')
-    expect(current_path).to eq "/merchants/#{merchant_2.id}/items"
+    expect(current_path).to eq "/merchants/#{@merchant_1.id}/items"
     expect(page).to have_button('Enable')
-  end
 
-  it 'clicking disable changes status' do 
-    merchant_2 = Merchant.create!(name: 'Sweaters n Things')
-    item = merchant_2.items.create!(name: 'Fool Sweater', description: 'Ok', unit_price: 0.5107e5, status: 0, merchant_id: @merchant.id)
-    visit "/merchants/#{merchant_2.id}/items"
+    within("#enable-#{id}") do
+      click_button('Enable')
+    end
 
-    expect(page).not_to have_button('Disable')
-    click_button('Enable')
-    expect(current_path).to eq "/merchants/#{merchant_2.id}/items"
-    expect(page).to have_button('Disable')
+    expect(current_path).to eq "/merchants/#{@merchant_1.id}/items"
+    expect(page).not_to have_button('Enable')
   end
 
   it 'has a form to create a new item' do
@@ -106,7 +83,7 @@ describe 'Merchant Items Index' do
     fill_in 'Unit price', with: 12345
     click_button('Create Item')
 
-    expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+    expect(current_path).to eq "/merchants/#{@merchant_1.id}/items"
     expect(page).to have_link('New Product')
   end
 
@@ -114,8 +91,13 @@ describe 'Merchant Items Index' do
     fill_in 'Unit price', with: 12345
     click_button('Create Item')
 
-    expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+    expect(current_path).to eq "/merchants/#{@merchant_1.id}/items"
     expect(page).to have_content('Item not created, missing/incorrect information')
+  end
+
+  it 'lists top items top day' do
+    visit "/merchants/#{@merchant_3.id}/items"
+    expect(page).to have_content('Top selling date for explicabo was: 2021-06-04')
   end
 
 end
