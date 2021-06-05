@@ -7,7 +7,11 @@
   <div class="row">
     <ul class="overflow-auto" id="merchants">
       <% @merchants.each do |m| %>
-        <li><%= link_to m.name, admin_merchant_path(m.id), id: "merchant-#{m.id}" %></li>
+        <%= react_component("Merchant", {
+                            merchant: m,
+                            url: admin_merchant_path(m.id),
+                            auth_token: form_authenticity_token.to_s
+        }) %>
       <% end %>
     </ul>
   </div>

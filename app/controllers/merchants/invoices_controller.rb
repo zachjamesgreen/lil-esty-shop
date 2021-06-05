@@ -1,6 +1,6 @@
 class Merchants::InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.select('DISTINCT invoices.*').joins(invoice_items: :item).where('items.merchant_id = 10')
+    @invoices = Invoice.select('DISTINCT invoices.*').joins(invoice_items: :item).where('items.merchant_id = @merchant.id')
     @merchant = Merchant.find(params[:id])
 
   end
@@ -12,6 +12,7 @@ class Merchants::InvoicesController < ApplicationController
       .joins(invoice_items: :invoice)
       .joins(:merchant)
       .where('merchants.id = 10')
+      # require 'pry'; binding.pry
     else
       @invoice = Invoice.find(params[:id])
     end
