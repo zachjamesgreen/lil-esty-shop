@@ -13,17 +13,19 @@
     <div class="col">
       <div id="all_items">
         <h2><%= "Enabled Items" %></h2>
-        <ul id="enabled_items"><% @items.each do |item| %>
-          <% if item.status == 'enabled' %>
-          <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-          <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {disable: true} %>
+        <ul><% @items.each do |item| %>
+          <div id="disable-<%= item.id %>">
+            <% if item.status == 'enabled' %>
+            <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+            <%= button_to 'Disable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {disable: true} %></div>
           <% end %>
           <% end %></ul>
         <h2><%= "Disabled Items" %></h2>
-        <ul id="disabled_items"><% @items.each do |item| %>
-          <% if item.status == 'disabled' %>
-          <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
-          <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enable: true} %>
+        <ul><% @items.each do |item| %>
+          <div id="enable-<%= item.id %>">
+            <% if item.status == 'disabled' %>
+            <%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+            <%= button_to 'Enable', "/merchants/#{@merchant.id}/items/#{item.id}", method: :patch, params: {enable: true} %></div>
           <% end %>
           <% end %></ul>
       </div>
@@ -32,9 +34,11 @@
       <div id="top_items">
         <h2><%= "#{@merchant.name}'s 5 Top-Revenue Items" %></h2>
         <% @top_items.each do |item| %>
-          <ul><li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%></li>
+        <ul>
+          <li><%= link_to item.name, "/merchants/#{@merchant.id}/items/#{item.id}"%></li>
           <li><%= "Total Revenue Generated: #{number_to_currency(item.revenue/100)}" %></li>
-          <li><%= "Top selling date for #{item.name} was: #{item.top_day}" %></li></ul>
+          <li><%= "Top selling date for #{item.name} was: #{item.top_day}" %></li>
+        </ul>
         <% end %>
       </div>
     </div>
