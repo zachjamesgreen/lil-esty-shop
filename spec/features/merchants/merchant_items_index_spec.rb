@@ -110,6 +110,12 @@ describe 'Merchant Items Index' do
     expect(page).to have_link('New Product')
   end
 
-  it 'does not create incomplete items'
+  it 'does not create incomplete items' do
+    fill_in 'Unit price', with: 12345
+    click_button('Create Item')
+
+    expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+    expect(page).not_to have_link('New Product')
+  end
 
 end
