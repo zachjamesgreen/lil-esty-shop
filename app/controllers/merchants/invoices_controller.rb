@@ -12,7 +12,6 @@ class Merchants::InvoicesController < ApplicationController
       .joins(invoice_items: :invoice)
       .joins(:merchant)
       .where('merchants.id = 10')
-      # require 'pry'; binding.pry
     else
       @invoice = Invoice.find(params[:id])
     end
