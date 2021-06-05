@@ -56,7 +56,7 @@ describe 'Merchant Items Index' do
 
   it 'displays total revenue generated for each item' do
     within('div#top_items') do
-      expect(page).to have_content("Total Revenue Generated: $225,321.00")
+      expect(page).to have_content("Total Revenue Generated: $2,253.21")
     end
   end
 
@@ -93,4 +93,29 @@ describe 'Merchant Items Index' do
     expect(current_path).to eq "/merchants/#{merchant_2.id}/items"
     expect(page).to have_button('Disable')
   end
+
+  it 'has a form to create a new item' do
+    expect(page).to have_field('Name')
+    expect(page).to have_field('Description')
+    expect(page).to have_field('Unit price')
+  end
+
+  it 'creates a new item' do
+    fill_in 'Name', with: 'New Product'
+    fill_in 'Description', with: "It's a really great product."
+    fill_in 'Unit price', with: 12345
+    click_button('Create Item')
+
+    expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+    expect(page).to have_link('New Product')
+  end
+
+  it 'does not create incomplete items' do
+    fill_in 'Unit price', with: 12345
+    click_button('Create Item')
+
+    expect(current_path).to eq "/merchants/#{@merchant.id}/items"
+    expect(page).to have_content('Item not created, missing/incorrect information')
+  end
+
 end
