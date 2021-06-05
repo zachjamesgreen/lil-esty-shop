@@ -1,6 +1,6 @@
 class Admin::MerchantsController < ApplicationController
   def index
-    @merchants = Merchant.all
+    @merchants = Merchant.all.order(:name)
   end
 
   def show
@@ -20,6 +20,12 @@ class Admin::MerchantsController < ApplicationController
       flash[:error] = 'Merchant Not Updated'
     end
     redirect_to admin_merchant_path(merchant)
+  end
+
+  def enabled
+    merchant = Merchant.find params[:id]
+    merchant.update(enabled: params[:merchant][:enabled])
+    render json: {enabled: merchant.enabled}
   end
 
   private
