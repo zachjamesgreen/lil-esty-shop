@@ -25,7 +25,7 @@ class Merchants::ItemsController < ApplicationController
       flash[:alert] = "Successfully created item!"
     else
       flash[:error] = "Item not created, missing/incorrect information"
-      render :new
+      redirect_to "/merchants/#{@merchant.id}/items"
     end
   end
 

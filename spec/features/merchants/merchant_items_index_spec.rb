@@ -115,7 +115,7 @@ describe 'Merchant Items Index' do
     click_button('Create Item')
 
     expect(current_path).to eq "/merchants/#{@merchant.id}/items"
-    expect(page).not_to have_link('New Product')
+    expect(page).to have_content('Item not created, missing/incorrect information')
   end
 
 end
