@@ -18,8 +18,9 @@
 #page-contents {
   overflow: auto;
   display: block;
-  min-height: fit-content;
   height: 100%;
+  min-height: 63%;
+  min-height: 63vh;
 }
 
 footer {

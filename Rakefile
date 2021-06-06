@@ -97,30 +97,49 @@ desc "load test data csv's"
 task load_test_data: :environment do
   Rails.env = 'test'
   files = {
-    'customers' => 'db/data/test_data/customers.csv',
-    'merchants' => 'db/data/test_data/merchants.csv',
-    'invoices' => 'db/data/test_data/invoices.csv',
-    'items' => 'db/data/test_data/items.csv',
-    'invoice_items' => 'db/data/test_data/invoice_items.csv',
-    'transactions' => 'db/data/test_data/transactions.csv',
+    'Customer' => 'db/data/test_data/customers.csv',
+    'Merchant' => 'db/data/test_data/merchants.csv',
+    'Invoice' => 'db/data/test_data/invoices.csv',
+    'Item' => 'db/data/test_data/items.csv',
+    'InvoiceItem' => 'db/data/test_data/invoice_items.csv',
+    'Transaction' => 'db/data/test_data/transactions.csv',
   }
   files.each do |table, filename|
-    csv = CSV.read(filename, headers: true)
-    headers = csv.headers
-    values_list = csv.map do |rows|
-      rows.values_at.map do |values|
-        binding.pry
-        ActiveRecord::Base.connection.quote(values)
+    csv = CSV.open(filename, 'a+') do |row|
+      if table == 'Customer' 
+        Customer.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'Merchant' 
+        Merchant.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'Invoice' 
+        Invoice.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'Item' 
+        Item.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'InvoiceItem' 
+        InvoiceItem.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      else
+        Transaction.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
       end
     end
-
-    ActiveRecord::Base.connection.execute <<-SQL
-      INSERT INTO #{table} (#{headers.join(",")}) VALUES
-      #{values_list.map { |values| "(#{values.join(",")})" }.join(", ")}
-    SQL
+    end
   end
-
-end
 
 desc 'load test data to database'
 task load_test_data_seed: :environment do

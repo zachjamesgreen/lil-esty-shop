@@ -25,4 +25,11 @@ class Item < ApplicationRecord
       "Transactions Successful, but Invoices Pending/Cancelled"
     end
   end
+
+  def self.from_merch(merchant_id)
+    select('merchants.id, items.*, invoice_items.quantity, invoice_items.status')
+      .joins(invoice_items: :invoice)
+      .joins(:merchant)
+      .where('merchants.id = ?', merchant_id )
+  end
 end

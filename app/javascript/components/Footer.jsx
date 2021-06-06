@@ -30,22 +30,12 @@ class Footer extends React.Component {
           </div>
           <div className="col-6 col-sm-3 mt-2 pt-2">
             <blockquote className="blockquote">
-              <div className="pl-2">
-                <h5
-                  style={{ color: "rgb(240, 242, 245)" }}
-                  className="nav-link"
-                >
-                  Alex Klick
-                </h5>
-              </div>
-              <div className="pl-2">
-                <h5
-                  className="nav-link"
-                  style={{ color: "rgb(240, 242, 245)" }}
-                >
-                  Connect
-                </h5>
-              </div>
+              <h5 style={{ color: "rgb(240, 242, 245)" }} className="nav-link">
+                Alex Klick
+              </h5>
+              <h5 className="nav-link" style={{ color: "rgb(240, 242, 245)" }}>
+                Connect
+              </h5>
               <hr
                 className="float-left"
                 style={{
@@ -55,31 +45,18 @@ class Footer extends React.Component {
                   width: "90%",
                 }}
               />
-              <Link
-                href={this.state.github_data.html_url}
-                className="nav-link"
-                ref={this.inputRef}
-                onMouseEnter={() => {
-                  this.inputRef.current.focus();
-                }}
-              >
+              <Link href={this.state.github_data.html_url} className="nav-link">
                 Github: {this.state.github_data.login}
               </Link>
-              <span
-                className="align-baseline"
-                style={{ color: "rgb(240, 242, 245)" }}
+              <Link
+                className="nav-link"
+                href="https://www.linkedin.com/in/alex-klick"
               >
-                <Link
-                  className="nav-link"
-                  href="https://www.linkedin.com/in/alex-klick
-                    "
-                >
-                  Linkedin
-                </Link>
-                <a className="nav-link" style={{ color: "rgb(240, 242, 245)" }}>
-                  aklick12@gmail.com
-                </a>
-              </span>
+                Linkedin
+              </Link>
+              <a className="nav-link" style={{ color: "rgb(240, 242, 245)" }}>
+                aklick12@gmail.com
+              </a>
             </blockquote>
           </div>
         </div>
