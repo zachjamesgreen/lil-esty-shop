@@ -132,30 +132,34 @@ task load_test_data_seed: :environment do
   Rake::Task['db:migrate'].invoke
   customers = []
   items = []
-  50.times do
+  10.times do
     customers << Customer.create!(FactoryBot.attributes_for(:customer))
   end
 
-  50.times do
+  5.times do
     m = Merchant.create!(FactoryBot.attributes_for(:merchant))
     items << m.items.create!(FactoryBot.attributes_for(:item))
     items << m.items.create!(FactoryBot.attributes_for(:item))
+    items << m.items.create!(FactoryBot.attributes_for(:item))
+    items << m.items.create!(FactoryBot.attributes_for(:item))
+    items << m.items.create!(FactoryBot.attributes_for(:item))
   end
 
-  customers.each do |customer|
-    rand(1..3).times do
-      item = items.sample
+  binding.pry
+  Customer.all.each do |customer|
+    5.times do
       attrs = FactoryBot.attributes_for(:invoice)
-      attrs[:customer] = customer
-      invoice = item.invoices.create!(attrs)
-      InvoiceItem.find_by(invoice_id: invoice.id, item_id: item.id)
-                 .update(unit_price: item.unit_price, quantity: rand(0..5), status: rand(0..2))
+      attrs[:customer_id] = customer.id
+      invoice = Invoice.create!(attrs)
+      invoice.transactions.create!(FactoryBot.attributes_for(:transaction))
+      5.times do
+        item = items.sample
+        attrs = FactoryBot.attributes_for(:invoice_item)
+        attrs[:item_id] = item.id
+        attrs[:invoice_id] = invoice.id
+        InvoiceItem.create!(attrs)
+      end
     end
-  end
-
-  invoices = Invoice.all
-  invoices.each do |invoice|
-    invoice.transactions.create!(FactoryBot.attributes_for(:transaction))
   end
 end
 #

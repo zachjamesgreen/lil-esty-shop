@@ -10,4 +10,10 @@ class Merchants::DashboardController < ApplicationController
     .limit(5)
     @items_pending = InvoiceItem.merch_not_shipped(params[:id])
   end
+
+  private
+
+  def merch_params
+    params.permit()
+  end
 end

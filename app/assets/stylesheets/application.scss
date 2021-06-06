@@ -15,7 +15,14 @@
  */
 
 @import "bootstrap";
+#page-contents {
+  overflow: auto;
+  display: block;
+  min-height: fit-content;
+  height: 100%;
+}
 
 footer {
   background-color: rgb(38, 38, 38);
+  bottom: 0;
 }
