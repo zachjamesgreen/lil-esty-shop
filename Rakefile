@@ -96,9 +96,6 @@ end
 desc "load test data csv's"
 task load_test_data: :environment do
   Rails.env = 'test'
-  Rake::Task['db:drop'].invoke
-  Rake::Task['db:create'].invoke
-  Rake::Task['db:migrate'].invoke
   files = {
     'customers' => 'db/data/test_data/customers.csv',
     'merchants' => 'db/data/test_data/merchants.csv',
@@ -112,6 +109,7 @@ task load_test_data: :environment do
     headers = csv.headers
     values_list = csv.map do |rows|
       rows.values_at.map do |values|
+        binding.pry
         ActiveRecord::Base.connection.quote(values)
       end
     end
@@ -145,14 +143,13 @@ task load_test_data_seed: :environment do
     items << m.items.create!(FactoryBot.attributes_for(:item))
   end
 
-  binding.pry
-  Customer.all.each do |customer|
+  customers.each do |customer|
     5.times do
       attrs = FactoryBot.attributes_for(:invoice)
       attrs[:customer_id] = customer.id
       invoice = Invoice.create!(attrs)
       invoice.transactions.create!(FactoryBot.attributes_for(:transaction))
-      5.times do
+      4.times do
         item = items.sample
         attrs = FactoryBot.attributes_for(:invoice_item)
         attrs[:item_id] = item.id
