@@ -24,6 +24,5 @@ class Customer < ApplicationRecord
     joins(:invoices)
     .where('invoices.id = ?', invoice_id)
     .first
-    binding.pry
   end
 end
