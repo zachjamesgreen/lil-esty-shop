@@ -8,14 +8,30 @@ class Footer extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("https://api.github.com/users/alexklick", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        this.setState({ github_data: data });
-      });
+    let urls = [
+      "https://api.github.com/repos/zachjamesgreen/lil-esty-shop/collaborators",
+      "https://api.github.com/repos/zachjamesgreen/lil-esty-shop/contributors",
+    ];
+    let contributors_ids = [7896916, 20480167, 60951642, 77814101];
+    urls.forEach((url) => {
+      fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `token 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`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          let useful = [];
+          data.forEach((line) => {
+            contributors_ids.includes(line.id)
+              ? (useful = useful.concat(line))
+              : null;
+          });
+          let update_data = this.state.github_data.concat(useful);
+          this.setState({ github_data: update_data });
+        });
+    });
   }
   render() {
     return (
