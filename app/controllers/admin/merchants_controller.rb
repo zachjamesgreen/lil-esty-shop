@@ -1,6 +1,8 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all.order(:name)
+    @enabled = @merchants.where(enabled: true)
+    @disabled = @merchants.where(enabled: false)
   end
 
   def show
@@ -24,7 +26,7 @@ class Admin::MerchantsController < ApplicationController
 
   def enabled
     merchant = Merchant.find params[:id]
-    merchant.update(enabled: params[:merchant][:enabled])
+    merchant.update(enabled: params[:enabled])
     render json: {enabled: merchant.enabled}
   end
 

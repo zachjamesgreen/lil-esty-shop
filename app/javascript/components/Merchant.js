@@ -5,7 +5,6 @@ class Merchant extends React.Component {
     constructor(props) {
         super(props);
         this.state = {enabled: props.merchant.enabled}
-        // this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick = () => {
@@ -22,9 +21,7 @@ class Merchant extends React.Component {
 
     render () {
         const merchant = this.props.merchant
-        // this.setState({enabled: merchant.enabled})
         const url = this.props.url
-        let enabled = this.state.enabled
 
         return (
             <li key={merchant.id} id={ "merchant-" + merchant.id}>
