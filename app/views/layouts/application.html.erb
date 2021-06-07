@@ -29,10 +29,6 @@
               Merchants
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= form_with url: "/merchants/#{merchant_id}/dashboard", method: :GET do |form| %>
-                <%= form.number_field :merchant_id %>
-                <%= form.submit 'search', :class=>"btn btn-outline-success my-2 my-sm-0" %>
-              <% end %>
               <div class="dropdown-divider"></div>
               <%= link_to "Dashboard", "/admin", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
             </div>
@@ -49,11 +45,6 @@
             </div>
           </li>
         </ul>
-        <!-- dd form later, currently not using to pass capybara -->
-        <!-- <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
       </div>
     </nav>
     <div class="container">
