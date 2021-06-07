@@ -9,6 +9,11 @@ class Item < ApplicationRecord
 
   validates :name, :description, :unit_price, presence: true
 
+
+  scope :from_merch, ->(merchant_id) {    
+      select('merchants.id, items.*, invoice_items.quantity, invoice_items.status')
+      .joins(invoice_items: :invoice)
+      .where('merchants.id = ?', merchant_id )}
   def top_day
     limit = invoices.joins(:invoice_items).where(status: 2).count
     if limit >= 1
@@ -26,10 +31,14 @@ class Item < ApplicationRecord
     end
   end
 
-  def self.from_merch(merchant_id)
-    select('merchants.id, items.*, invoice_items.quantity, invoice_items.status')
-      .joins(invoice_items: :invoice)
-      .joins(:merchant)
-      .where('merchants.id = ?', merchant_id )
+  def self.from_merch(params)
+    select(' items.*, invoice_items.*, items.status')
+    .joins(invoice_items: :invoice)
+    .where('invoices.id =?', params[:invoice_id])
+    .where('items.merchant_id = ?', params[:id])
+  end
+
+  def convert_dollars
+    unit_price.to_f/100
   end
 end

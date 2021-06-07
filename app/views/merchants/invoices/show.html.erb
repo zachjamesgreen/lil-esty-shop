@@ -1,8 +1,10 @@
+<div class="col-lg-8">
 <div class="row">
   <div class="col-lg-4 rounded" style="border: 2px red; padding: 15px">
-
     <div class="card " style="background-color: rgb(191, 202, 209);min-width: 480px">
-      <div class="card-header" style="background-color: rgb(59, 87, 105)">
+      <div class="card-header" style="background-color: rgb(134, 153, 165)">
+        <h4 class="card-title">Invoice # <%= @invoice.id %></h4>
+        <h4><%= @invoice.formatted_time %></h4>
         <!-- <h4 style="padding-top: 8px; color: rgb(191, 202, 209);" class="card-title"><%= @invoice.id %> Status: <%= @invoice.status%></h4> -->
         <hr
           class="float-left"
@@ -12,22 +14,32 @@
             width: 50%;
           "
         />
+        <h4><%= @customer.first_name + ' ' + @customer.last_name %></h4>
+        <h3>Invoice Revenue $<%= @invoice.revenue %></h3>
         <br>
       </div>
       <div class="card-body" style="background-color: rgb(217, 221, 222)">
         <!-- will eventually build as a react component for search and see pet info as modal -->
       </div>
-      </div>
     </div>
   </div>
-
-<h4><%= @invoice.id %></h4>
-<h4><%= @invoice.formatted_time %></h4>
-<h4><%= @customer.first_name + ' ' + @customer.last_name %></h4>
-<h3>Invoice Revenue $<%= @invoice.revenue %></h3>
-<% @items.each do |item| %>
-  <p>Item name: <%= item.name %></p>
-  <p>Item quantity: <%= item.quantity %></p>
-  <p>Item status: <%= item.status %></p>
-  <p>Item price: <%= item.unit_price %></p>
-<% end %>
+</div>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>quantity</th>
+      <th>status</th>
+      <th>price</th>
+      <th>id</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.quantity %></td>
+        <td> <%= item.status %></td>
+        <td>$<%= item.convert_dollars %></td>
+        <td> <%= item.id %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

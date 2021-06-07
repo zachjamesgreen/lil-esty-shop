@@ -4,8 +4,10 @@ class Merchants::InvoicesController < ApplicationController
     @invoices = Invoice.merchant_invoices(@merchant.id)
   end
   def show
-    @invoice = Invoice.find(params[:id])
-    @customer = Customer.whos_invoice(params[:id])
-    @items = Item.from_merch(params[:merch_id])
+    @invoice = Invoice.find(params[:invoice_id])
+    @merchant = Merchant.find(params[:id])
+    @customer = Customer.find(@invoice.customer_id)
+    binding.pry
+    @items = Item.from_merch(params)
   end
 end

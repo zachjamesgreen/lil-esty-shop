@@ -43,7 +43,7 @@
         <td><%= item.name %></td>
         <td>
           <%= link_to "#{item.invoice_id}",
-          merchants_merch_invoice_path(merchant_id: @merchant.id),:class =>
+          merchants_merch_invoice_path(invoice_id: item.invoice_id),:class =>
           "nav-link", :style=>"color: rgb(59, 87, 105);" %>
         </td>
         <td><%= item.formatted_time %></td>
