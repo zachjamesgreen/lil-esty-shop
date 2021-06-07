@@ -16,6 +16,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
     print "\n"
   end
 
@@ -29,6 +30,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
     print "\n"
   end
 
@@ -42,7 +44,8 @@ namespace :csv_load do
         i = i + 1
       end
     end
-  print "\n"
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
+    print "\n"
   end
 
   desc "load invoice_items csv"
@@ -55,6 +58,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
     print "\n"
   end
 
@@ -68,6 +72,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
     print "\n"
   end
 
@@ -81,6 +86,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
     print "\n"
   end
 
@@ -120,6 +126,8 @@ task load_test_data: :environment do
       INSERT INTO #{table} (#{headers.join(",")}) VALUES
       #{values_list.map { |values| "(#{values.join(",")})" }.join(", ")}
     SQL
+
+    ActiveRecord::Base.connection.reset_pk_sequence!(table)
   end
 
 end

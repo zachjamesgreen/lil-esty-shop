@@ -10,10 +10,10 @@ RSpec.describe 'Admin Merchant Index' do
   it 'should have enable/disable button next to merchant name' do
     merchant = Merchant.all.order(:name).first
     visit '/admin/merchants'
-    within ".merchants #merchant-#{merchant.id}" do
-      expect(page).to have_selector(:link_or_button, 'Enabled')
-      click_button('Enabled')
-      expect(page).to have_selector(:link_or_button, 'Disabled')
+    within "#merchant-#{merchant.id}" do
+      expect(page).to have_selector(:link_or_button, 'Enable')
+      click_button('Enable')
+      expect(page).to have_selector(:link_or_button, 'Disable')
     end
   end
 
@@ -30,5 +30,15 @@ RSpec.describe 'Admin Merchant Index' do
       expect(page.find('h3')).to have_content('Disabled')
       expect(page.all('li').size).to eq disabled_count
     end
+  end
+
+  it 'creates a new merchant' do
+    visit '/admin/merchants'
+    form = page.find('form')
+    within form do
+      fill_in 'name', with: 'New New Merchant'
+      click_on 'commit'
+    end
+    expect(page).to have_content('New New Merchant')
   end
 end
