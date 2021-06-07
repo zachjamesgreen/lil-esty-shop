@@ -4,31 +4,32 @@
     <h1>Admin Merchant Index</h1>
   </div>
 
+  <div class="row">
+    Create a new Merchant
+    <%= react_component("CreateMerchant", {
+      auth_token: form_authenticity_token.to_s
+    }) %>
+  </div>
+
   <div class="row merchants">
 
     <div class="col" id="enabled">
       <h3>Enabled</h3>
       <ul id="enabled-merchants">
-        <% @enabled.each do |m| %>
-          <%= react_component("Merchant", {
-            merchant: m,
-            url: admin_merchant_path(m.id),
-            auth_token: form_authenticity_token.to_s
-          }) %>
-        <% end %>
+        <%= react_component("Merchants", {
+          merchants: @enabled,
+          auth_token: form_authenticity_token.to_s
+        }) %>
       </ul>
     </div>
 
     <div class="col" id="disabled">
       <h3>Disabled</h3>
       <ul id="disabled-merchants">
-        <% @disabled.each do |m| %>
-          <%= react_component("Merchant", {
-            merchant: m,
-            url: admin_merchant_path(m.id),
-            auth_token: form_authenticity_token.to_s
-          }) %>
-        <% end %>
+        <%= react_component("Merchants", {
+          merchants: @disabled,
+          auth_token: form_authenticity_token.to_s
+        }) %>
       </ul>
     </div>
 
