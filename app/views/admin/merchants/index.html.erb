@@ -33,6 +33,20 @@
       </ul>
     </div>
 
+    <div class="col" id="top5">
+      <h3>Top 5 Merchants</h3>
+      <ol id="top5-list">
+        <% @top_5_merchants.each do |m| %>
+          <li id="top5-list-<%=m.id %>" class="top5-list-item">
+            <%= link_to m.name, admin_merchant_path(m) %> |
+            <p><%= number_to_currency(m.revenue/100) %></p> |
+            <p>Top day: <%= m.top_day[0].created_at.strftime('%A, %B %d, %Y') %></p>
+          </li>
+        <% end %>
+      </ol>
+
+    </div>
+
   </div>
 </div>
 
