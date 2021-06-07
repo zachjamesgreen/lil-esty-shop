@@ -17,4 +17,9 @@ class Invoice < ApplicationRecord
   def revenue
     invoice_items.sum('quantity * unit_price')
   end
+  def self.merchant_invoices(merchant_id)
+    select('DISTINCT invoices.*')
+    .joins(invoice_items: :item)
+    .where('items.merchant_id = ?', merchant_id)
+  end
 end
