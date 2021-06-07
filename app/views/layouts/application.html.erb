@@ -29,10 +29,12 @@
               Merchants
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Apply to Adopt", "/app/new", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+              <%= form_with url: "/merchants/#{merchant_id}/dashboard", method: :GET do |form| %>
+                <%= form.number_field :merchant_id %>
+                <%= form.submit 'search', :class=>"btn btn-outline-success my-2 my-sm-0" %>
+              <% end %>
               <div class="dropdown-divider"></div>
-              <%= link_to "Current Applicants", "/app
-              ", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+              <%= link_to "Dashboard", "/admin", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -40,10 +42,10 @@
               Admin
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Apply to Adopt", "/app/new", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+              <%= link_to "Dashboard", "/admin", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
               <div class="dropdown-divider"></div>
-              <%= link_to "Current Applicants", "/app
-              ", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+              <%= link_to "Merchants", "/admin/merchants", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+              <%= link_to "Invoices", "/admin/merchants", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
             </div>
           </li>
         </ul>
@@ -67,6 +69,17 @@
   </body>
   <footer>
     <div class="container sticky-bottom"> 
+      <div className="col-12 col-lg-10 mt-2 pt-2">
+        <div className="row">
+          <div className="col-3 mt-2 pt-2">
+            <blockquote className="blockquote">
+              <div className="mx-auto">
+                <h5 style="color: rgb(240, 242, 245)">See Our Devs</h5>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
       <%= react_component('Footer') %>
     </div>
   </footer>

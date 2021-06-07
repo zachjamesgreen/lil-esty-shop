@@ -1,6 +1,7 @@
 class Customer < ApplicationRecord
   has_many :invoices
-
+  has_many :transactions, through: :invoices
+  has_many :invoice_items, through: :invoices
   def self.top_5_customers_by_transactions
     select('customers.*, count(transactions.id) as transaction_count, transactions.result')
       .joins(invoices: :transactions)
