@@ -5,19 +5,26 @@ require_relative 'config/application'
 require 'csv'
 Rails.application.load_tasks
 
+def insert(table, file_path)
+  csv = CSV.read(file_path, headers: true)
+  headers = csv.headers
+  values_list = csv.map do |rows|
+    rows.values_at.map do |values|
+      ActiveRecord::Base.connection.quote(values)
+    end
+  end
+  ActiveRecord::Base.connection.execute <<-SQL
+      INSERT INTO #{table} (#{headers.join(",")}) VALUES
+      #{values_list.map { |values| "(#{values.join(",")})" }.join(", ")}
+  SQL
+  ActiveRecord::Base.connection.reset_pk_sequence!(table)
+end
+
 namespace :csv_load do
   desc "load customer csv"
   task customers: :environment do
     csv_path = 'db/data/customers.csv'
-    i = 1
-    CSV.foreach(csv_path, headers: true) do |row|
-      if Customer.create! row.to_h
-        print "#{i} Customer Records Done\r"
-        i = i + 1
-      end
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
-    print "\n"
+    insert('customers', csv_path)
   end
 
   desc "load invoices csv"
@@ -37,15 +44,7 @@ namespace :csv_load do
   desc "load items csv"
   task items: :environment do
     csv_path = 'db/data/items.csv'
-    i = 1
-    CSV.foreach(csv_path, headers: true) do |row|
-      if Item.create! row.to_h
-        print "#{i} Item Records Done\r"
-        i = i + 1
-      end
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('items')
-    print "\n"
+    insert('items', csv_path)
   end
 
   desc "load invoice_items csv"
@@ -65,15 +64,7 @@ namespace :csv_load do
   desc "load merchants csv"
   task merchants: :environment do
     csv_path = 'db/data/merchants.csv'
-    i = 1
-    CSV.foreach(csv_path, headers: true) do |row|
-      if Merchant.create! row.to_h
-        print "#{i} Merchant Records Done\r"
-        i = i + 1
-      end
-    end
-    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
-    print "\n"
+    insert('merchants', csv_path)
   end
 
   desc "load transactions csv"
@@ -114,20 +105,7 @@ task load_test_data: :environment do
     'transactions' => 'db/data/test_data/transactions.csv',
   }
   files.each do |table, filename|
-    csv = CSV.read(filename, headers: true)
-    headers = csv.headers
-    values_list = csv.map do |rows|
-      rows.values_at.map do |values|
-        ActiveRecord::Base.connection.quote(values)
-      end
-    end
-
-    ActiveRecord::Base.connection.execute <<-SQL
-      INSERT INTO #{table} (#{headers.join(",")}) VALUES
-      #{values_list.map { |values| "(#{values.join(",")})" }.join(", ")}
-    SQL
-
-    ActiveRecord::Base.connection.reset_pk_sequence!(table)
+    insert(table, filename)
   end
 
 end
