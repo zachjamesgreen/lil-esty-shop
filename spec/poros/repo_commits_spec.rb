@@ -35,7 +35,7 @@ describe RepoCommits do
   end
 
   it 'does not include excluded ids' do
-    expect(@commits.keys.include?("BriainZanti")).to eq false
+    expect(@commits.keys.include?('BriainZanti')).to eq false
     expect(@commits.keys).to eq(['zachjamesgreen', 'NoahZinter', 'AlexKlick', 'ztrokey'])
   end
 
