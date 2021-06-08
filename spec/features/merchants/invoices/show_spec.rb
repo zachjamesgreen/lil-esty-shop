@@ -20,7 +20,6 @@ RSpec.describe 'merchant invoice show page' do
     invoice_item_2 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_2.id, quantity: 1, unit_price: 200, status: 2)
     invoice_item_3 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_3.id, quantity: 1, unit_price: 300, status: 2)
     visit "merchants/#{merchant_1.id}/invoices/#{invoice_1.id}"
-    save_and_open_page
     expect(page).to have_content("Invoice Revenue $600.0")
   end
 end

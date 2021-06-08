@@ -62,7 +62,6 @@ RSpec.describe Merchant, type: :model do
       it 'returns the topday by revenue for a merchant' do
         raven = Merchant.find 15
         top_day = raven.top_day.first.created_at
-        print top_day.class
         expect(top_day).to be_instance_of(ActiveSupport::TimeWithZone)
       end
     end
