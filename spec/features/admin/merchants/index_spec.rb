@@ -45,9 +45,9 @@ RSpec.describe 'Admin Merchant Index' do
 
   it 'shows top 5 merchants' do
     visit '/admin/merchants'
-    raven = Merchant.find 15
+    raven = Merchant.find 5
     top_day = raven.top_day[0].created_at.strftime('%A, %B %d, %Y')
-    galina = Merchant.find 31
+    galina = Merchant.find 1
     # evia = Merchant.find 13
     # cole = Merchant.find 35
     # berry = Merchant.find 12
@@ -56,8 +56,8 @@ RSpec.describe 'Admin Merchant Index' do
       within '#top5-list' do
         expect(page.all('.top5-list-item').size).to eq 5
         expect(raven.name).to appear_before galina.name
-        within '#top5-list-15' do
-          expect(page).to have_content '$64.33'
+        within '#top5-list-5' do
+          expect(page).to have_content '$3,639.10'
           expect(page).to have_content top_day
         end
       end
