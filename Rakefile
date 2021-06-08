@@ -1,6 +1,3 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
-
 require_relative 'config/application'
 require 'csv'
 Rails.application.load_tasks
@@ -16,6 +13,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
     print "\n"
   end
 
@@ -29,6 +27,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
     print "\n"
   end
 
@@ -42,7 +41,8 @@ namespace :csv_load do
         i = i + 1
       end
     end
-  print "\n"
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
+    print "\n"
   end
 
   desc "load invoice_items csv"
@@ -55,6 +55,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
     print "\n"
   end
 
@@ -68,6 +69,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
     print "\n"
   end
 
@@ -81,6 +83,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
     print "\n"
   end
 
@@ -167,7 +170,6 @@ task load_test_data_seed: :environment do
       attrs = FactoryBot.attributes_for(:invoice)
       attrs[:customer_id] = customer.id
       invoice = Invoice.create!(attrs)
-      binding.pry
       invoice.transactions.create!(FactoryBot.attributes_for(:transaction))
       4.times do
         item = items.sample
