@@ -16,21 +16,24 @@ describe 'Merchant Items Index' do
 
   it 'lists the five most popular items' do
     expect(page).to have_content("Nina Mayert's 5 Top-Revenue Items")
-    expect(page).to have_content('Total Revenue Generated: $4.48')
+    save_and_open_page
+    within('div#top_items') do
+      expect(page).to have_content('Small Aluminum Table')
+      expect('Small Aluminum Table').to appear_before('Rustic Bronze Lamp')
+    end
   end
 
   it 'each item listed has a link to its show page' do
-    visit "/merchants/#{@merchant_3.id}/items"
-    expect(page).to have_link('explicabo')
+    within('div#all_items')
+    expect(page).to have_link('Durable Paper Bench')
   end
 
   it 'clicking the link travels to an items show page' do
-    visit "/merchants/#{@merchant_3.id}/items"
-    item = @items_3.last
+    item_id = @items_1.first.id
     within('div#top_items') do
-      click_link('explicabo')
+      click_link('Durable Paper Bench')
     end
-    expect(current_path).to eq "/merchants/#{@merchant_3.id}/items/#{item.id}"
+    expect(current_path).to eq "/merchants/#{@merchant_1.id}/items/#{item_id}"
   end
 
   it 'has sections for enabled and disabled items' do
@@ -95,8 +98,7 @@ describe 'Merchant Items Index' do
   end
 
   it 'lists top items top day' do
-    visit "/merchants/#{@merchant_3.id}/items"
-    expect(page).to have_content('Top selling date for explicabo was: 2021-06-04')
+    expect(page).to have_content('Top selling date for Small Aluminum Table was: 2021-06-08')
   end
 
 end
