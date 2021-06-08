@@ -22,13 +22,7 @@ class Footer extends React.Component {
       })
         .then((response) => response.json())
         .then((data) => {
-          let useful = [];
-          data.forEach((line) => {
-            contributors_ids.includes(line.id)
-              ? (useful = useful.concat(line))
-              : null;
-          });
-          let update_data = this.state.github_data.concat(useful);
+          let update_data = this.state.github_data.concat(data);
           this.setState({ github_data: update_data });
         });
     });

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Merchant Dashboard Page' do
 
   before(:all) do
-    @merch = Merchant.find(3)
+    @merch = Merchant.find(1)
   end
   # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
   # Then I see the name of my merchant
@@ -30,12 +30,14 @@ describe 'Merchant Dashboard Page' do
   # conducted with my merchant
   it 'has the top 5 customers by number successful transactions' do
     visit "/merchants/#{@merch.id}/dashboard"
+    binding.pry
     within('#top_cust') do 
-      expect(page).to have_content('Isaura Kshlerin')
-      expect(page).to have_content('Mickie Schmeler')
-      expect(page).to have_content('Floyd Rau')
-      expect(page).to have_content('Coral Rohan')
-      expect(page).to have_content('Fiona MacGyver')
+    #hardcoded as extra model test
+      expect(page).to have_content('Salvatore	Deckow')
+      expect(page).to have_content('Rachell	Pfannerstill')
+      expect(page).to have_content('Otelia	Daniel')
+      expect(page).to have_content('Dean	Collins')
+      expect(page).to have_content('An	Mraz')
     end
   end
 
