@@ -38,54 +38,36 @@ class Footer extends React.Component {
   render() {
     let users = this.state.github_data.slice(1).map((user, index) => {
       return (
-        <React.Fragment>
-          <div className="col-3 col-sm-5 mt-4 mb-4 pt-2">
-            <blockquote className="blockquote">
-              <Link
-                className="nav-link"
-                href={
-                  "https://www.linkedin.com/in/" +
-                  Object.keys(this.state.github_data[0])[index]
-                }
-              >
-                <i class="fab fa-linkedin">
-                  {" "}
-                  {Object.values(this.state.github_data[0])[index][1]}
-                </i>
-              </Link>
-              <Link href={user.html_url} className="nav-link">
-                <i class="fab fa-github-square"></i> {user.login}
-              </Link>
-              <hr
-                className="float-left"
-                style={{
-                  color: "rgb(105, 0, 0)",
-                  marginLeft: "15px",
-                  border: "3px solid rgb(125, 0, 0)",
-                  width: "90%",
-                }}
-              />{" "}
-              <a className="nav-link" style={{ color: "rgb(240, 242, 245)" }}>
-                {Object.values(this.state.github_data[0])[index][0]}
-              </a>
-            </blockquote>
+        <div className="col-6 col-sm-6 col-md-3 col-xl-2 mt-4 mb-4">
+          <div className="d-block p-0">
+            <Link href={user.html_url} className="nav-link">
+              <i className="fab fa-github-square"> </i> {user.login}
+            </Link>
           </div>
-        </React.Fragment>
+          <div className="d-block mb-4 p-0">
+            <Link
+              className="nav-link"
+              href={
+                "https://www.linkedin.com/in/" +
+                Object.keys(this.state.github_data[0])[index]
+              }
+            >
+              <i className="fab fa-linkedin"> </i>{" "}
+              {Object.values(this.state.github_data[0])[index][1]}
+            </Link>
+          </div>
+        </div>
       );
     });
     console.log(this.state.github_data[0]);
     return (
-      <div className="col-12 mt-2 pt-2">
-        <div className="row justify-content-center">
-          <div className="col-2 mt-4 mb-4 pt-2">
-            <blockquote className="blockquote">
-              <div className="mx-auto">
-                <h5 style={{ color: "rgb(240, 242, 245)" }}>See Our Devs</h5>
-              </div>
-            </blockquote>
+      <div className="col-12 mt-4 pt-2 mb-2 px-2 g-0 ">
+        <div className="col-2 mx-auto">
+          <div className="">
+            <h5 style={{ color: "rgb(240, 242, 245)" }}>Hire Our Devs</h5>
           </div>
-          {users}
         </div>
+        <div className="row justify-content-center">{users}</div>
       </div>
     );
   }
