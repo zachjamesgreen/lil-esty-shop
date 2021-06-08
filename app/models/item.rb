@@ -14,6 +14,7 @@ class Item < ApplicationRecord
       select('merchants.id, items.*, invoice_items.quantity, invoice_items.status')
       .joins(invoice_items: :invoice)
       .where('merchants.id = ?', merchant_id )}
+      
   def top_day
     limit = invoices.joins(:invoice_items).where(status: 2).count
     if limit >= 1
