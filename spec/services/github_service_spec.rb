@@ -7,10 +7,4 @@ describe GithubService do
     expect(expected).is_a? Array
     expect(expected.first).is_a? Hash
   end
-
-  # it 'returns commits' do
-  #   repo = RepoCommits.new
-  #   a = repo.list_commits
-  #   binding.pry
-  # end
 end
