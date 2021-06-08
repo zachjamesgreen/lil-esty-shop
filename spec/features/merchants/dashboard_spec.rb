@@ -28,17 +28,21 @@ describe 'Merchant Dashboard Page' do
   # who have conducted the largest number of successful transactions with my merchant
   # And next to each customer name I see the number of successful transactions they have
   # conducted with my merchant
-  it 'has the top 5 customers by number successful transactions' do
+  it 'has the top 5 customers' do
     visit "/merchants/#{@merch.id}/dashboard"
     binding.pry
     within('#top_cust') do 
-    #hardcoded as extra model test
+    #hardcoded as extra model test 
       expect(page).to have_content('Salvatore	Deckow')
       expect(page).to have_content('Rachell	Pfannerstill')
       expect(page).to have_content('Otelia	Daniel')
       expect(page).to have_content('Dean	Collins')
       expect(page).to have_content('An	Mraz')
     end
+  end
+
+  it 'customers sorted by number successful transactions' do
+    
   end
 
   it 'shows number of successful transactions with merchant for the top 5 customers' do
