@@ -20,26 +20,28 @@
       </div>
       <div class="card-body" style="background-color: rgb(217, 221, 222)">
         <!-- will eventually build as a react component for search and see pet info as modal -->
+        <table class="table table-bordered">
+          <tr>
+            <th scope="col">#</th>
+            <th>Name</th>
+            <th>quantity</th>
+            <th>status</th>
+            <th>price</th>
+            <th>id</th>
+          </tr>
+          <% @items.each_with_index do |item, index| %>
+            <tr>
+              <th scope="row"><%=index + 1%></th>
+              <td><%= item.name %></td>
+              <td><%= item.quantity %></td>
+              <td> <%= item.status %></td>
+              <td>$<%= item.convert_dollars %></td>
+              <td> <%= item.id %></td>
+            </tr>
+          <% end %>
+        </table>
       </div>
     </div>
   </div>
 </div>
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>quantity</th>
-      <th>status</th>
-      <th>price</th>
-      <th>id</th>
-    </tr>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-        <td><%= item.quantity %></td>
-        <td> <%= item.status %></td>
-        <td>$<%= item.convert_dollars %></td>
-        <td> <%= item.id %></td>
-      </tr>
-    <% end %>
-  </table>
 </div>

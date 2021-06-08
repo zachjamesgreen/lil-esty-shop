@@ -39,7 +39,7 @@ class Footer extends React.Component {
     let users = this.state.github_data.slice(1).map((user, index) => {
       return (
         <React.Fragment>
-          <div className="col-3 col-sm-2 mt-4 mb-4 pt-2">
+          <div className="col-3 col-sm-5 mt-4 mb-4 pt-2">
             <blockquote className="blockquote">
               <Link
                 className="nav-link"
