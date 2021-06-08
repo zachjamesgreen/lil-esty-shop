@@ -167,6 +167,7 @@ task load_test_data_seed: :environment do
       attrs = FactoryBot.attributes_for(:invoice)
       attrs[:customer_id] = customer.id
       invoice = Invoice.create!(attrs)
+      binding.pry
       invoice.transactions.create!(FactoryBot.attributes_for(:transaction))
       4.times do
         item = items.sample
@@ -186,10 +187,10 @@ task csv_test_seed: :environment do
   Rake::Task['db:create'].invoke
   Rake::Task['db:migrate'].invoke
   csv_paths = ['db/data/test_data/customers.csv',
+              'db/data/test_data/merchants.csv',
               'db/data/test_data/invoices.csv',
               'db/data/test_data/items.csv',
               'db/data/test_data/invoice_items.csv',
-              'db/data/test_data/merchants.csv',
               'db/data/test_data/transactions.csv']
   csv_paths.each do |path|
     CSV.foreach(path, headers: true) do |row|
@@ -200,7 +201,6 @@ task csv_test_seed: :environment do
       elsif path == 'db/data/test_data/invoices.csv'
         Invoice.create! row.to_h
       elsif path == 'db/data/test_data/items.csv'
-        binding.pry
         Item.create! row.to_h
       elsif path == 'db/data/test_data/invoice_items.csv'
         InvoiceItem.create! row.to_h
