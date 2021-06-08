@@ -5,6 +5,21 @@ RSpec.describe Merchant, type: :model do
     it {should have_many(:items)}
   end
 
+  describe 'class methods' do
+    describe '#top_5_merchants' do
+      it 'returns the top 5 merchants by revenue' do
+        raven = Merchant.find 15
+        galina = Merchant.find 31
+        evia = Merchant.find 13
+        cole = Merchant.find 35
+        berry = Merchant.find 12
+        merchants = Merchant.top_5_merchants
+
+        expect(merchants).to eq [raven,galina,evia,cole,berry]
+      end
+    end
+  end
+
   describe 'instance methods' do
     before :each do
       @merchant = Merchant.create!(name: 'Sweaters n Things')
@@ -39,7 +54,16 @@ RSpec.describe Merchant, type: :model do
       it 'does not return items with failed transactions' do
         @transaction_1 = @invoice_1.transactions.create!(invoice_id: @invoice_1.id, credit_card_number:'123445677890', credit_card_expiration_date: '02/07', result: 1)
         expect(@merchant.top_five.length).to eq 4
-        expect(@merchant.top_five).to eq ([@item_6, @item_5, @item_4, @item_3])
+        expect(@merchant.top_five).to eq([@item_6, @item_5, @item_4, @item_3])
+      end
+    end
+
+    describe '#top_day' do
+      it 'returns the topday by revenue for a merchant' do
+        raven = Merchant.find 15
+        top_day = raven.top_day.first.created_at
+        print top_day.class
+        expect(top_day).to be_instance_of(ActiveSupport::TimeWithZone)
       end
     end
   end
