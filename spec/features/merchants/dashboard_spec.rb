@@ -87,7 +87,6 @@ describe 'Merchant Dashboard Page' do
   it 'has the date of the invoice formatted' do
     visit "/merchants/#{@merch.id}/dashboard"
     within('#ship_table') do
-      binding.pry
     end
   end
   

@@ -32,7 +32,6 @@ class Merchants::ItemsController < ApplicationController
   def update
     @merchant = Merchant.find(params[:id])
     item = Item.find(params[:item_id])
-    # require 'pry'; binding.pry
     if params[:commit]
       if item.update(item_params)
           redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
