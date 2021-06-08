@@ -4,34 +4,37 @@ describe 'Merchant Items Index' do
   before :each do
     @merchant_1 = Merchant.find(1)
     @merchant_2 = Merchant.find(2)
-    @merchant_3 = Merchant.find(24)
+    @merchant_3 = Merchant.find(3)
     @items_1 = @merchant_1.items
     @items_2 = @merchant_2.items
     @items_3 = @merchant_3.items
     visit "/merchants/#{@merchant_1.id}/items"
   end
   it 'has a header' do
-    expect(page).to have_content("Shelby's Items")
+    expect(page).to have_content("Kirstin Feil's Items")
   end
 
   it 'lists the five most popular items' do
-    visit "/merchants/#{@merchant_3.id}/items"
-    expect(page).to have_content("Glennis's 5 Top-Revenue Items")
-    expect(page).to have_content('Total Revenue Generated: $4.48')
+    expect(page).to have_content("Kirstin Feil's 5 Top-Revenue Items")
+    within('div#top_items') do
+      expect(page).to have_content('Aerodynamic Steel Plate')
+      expect('Aerodynamic Steel Plate').to appear_before('Sleek Aluminum Chair')
+    end
   end
 
   it 'each item listed has a link to its show page' do
-    visit "/merchants/#{@merchant_3.id}/items"
-    expect(page).to have_link('explicabo')
+    within('div#all_items') do
+      expect(page).to have_link('Enormous Iron Shirt')
+    end
   end
 
   it 'clicking the link travels to an items show page' do
-    visit "/merchants/#{@merchant_3.id}/items"
-    item = @items_3.last
     within('div#top_items') do
-      click_link('explicabo')
+      click_link('Enormous Iron Shirt')
     end
-    expect(current_path).to eq "/merchants/#{@merchant_3.id}/items/#{item.id}"
+    item_id = @items_1.first.id
+
+    expect(current_path).to eq "/merchants/#{@merchant_1.id}/items/#{item_id}"
   end
 
   it 'has sections for enabled and disabled items' do
@@ -96,8 +99,7 @@ describe 'Merchant Items Index' do
   end
 
   it 'lists top items top day' do
-    visit "/merchants/#{@merchant_3.id}/items"
-    expect(page).to have_content('Top selling date for explicabo was: 2021-06-04')
+    expect(page).to have_content('Top selling date for Aerodynamic Steel Plate was: 2021-06-08')
   end
 
 end
