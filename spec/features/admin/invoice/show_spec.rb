@@ -36,7 +36,7 @@ RSpec.describe 'Admin Invoice Show' do
     ii = InvoiceItem.find(1)
 
     visit "/admin/invoices/#{invoice.id}"
-    save_and_open_page
+    
     expect(page).to have_content(item.name)
     expect(page).to have_content(ii.quantity)
     expect(page).to have_content(ii.unit_price)
