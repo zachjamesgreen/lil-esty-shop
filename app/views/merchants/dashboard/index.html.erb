@@ -15,7 +15,7 @@
   <br />
 </div>
 <div class="row" id="top_cust">
-  <div class="col-4" id="cust_table">
+  <div class="col-4" id="cust_table_div">
     <h5>Top Customers</h5>
     <table class="table" id="cust_table">
       <tr>
@@ -43,8 +43,9 @@
         <td><%= item.name %></td>
         <td>
           <%= link_to "#{item.invoice_id}",
-          merchants_merch_invoice_path(invoice_id: item.invoice_id),:class =>
-          "nav-link", :style=>"color: rgb(59, 87, 105);" %>
+            merchants_merch_invoice_path(invoice_id: item.invoice_id),:class =>
+            "nav-link", :style=>"color: rgb(59, 87, 105);" 
+          %>
         </td>
         <td><%= item.formatted_time %></td>
       </tr>
