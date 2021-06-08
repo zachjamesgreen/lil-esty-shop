@@ -178,6 +178,40 @@ task load_test_data_seed: :environment do
     end
   end
 end
+
+desc 'load csv data to database'
+task csv_test_seed: :environment do
+  Rails.env = 'test'
+  Rake::Task['db:drop'].invoke
+  Rake::Task['db:create'].invoke
+  Rake::Task['db:migrate'].invoke
+  csv_paths = ['db/data/test_data/customers.csv',
+              'db/data/test_data/invoices.csv',
+              'db/data/test_data/items.csv',
+              'db/data/test_data/invoice_items.csv',
+              'db/data/test_data/merchants.csv',
+              'db/data/test_data/transactions.csv']
+  csv_paths.each do |path|
+    CSV.foreach(path, headers: true) do |row|
+      if path == 'db/data/test_data/customers.csv'
+        Customer.create! row.to_h
+      elsif path == 'db/data/test_data/merchants.csv'
+        Merchant.create! row.to_h
+      elsif path == 'db/data/test_data/invoices.csv'
+        Invoice.create! row.to_h
+      elsif path == 'db/data/test_data/items.csv'
+        binding.pry
+        Item.create! row.to_h
+      elsif path == 'db/data/test_data/invoice_items.csv'
+        InvoiceItem.create! row.to_h
+      else
+        Transaction.create! row.to_h
+      end
+    end
+  end
+end
+
+
 #
 # psql -U zach -d little-etsy-shop_test -c "Copy (select * from customers) To STDOUT With CSV HEADER DELIMITER ',';" > ./db/data/test_data/customers.csv
 # psql -U zach -d little-etsy-shop_test -c "Copy (select * from merchants) To STDOUT With CSV HEADER DELIMITER ',';" > ./db/data/test_data/merchants.csv
