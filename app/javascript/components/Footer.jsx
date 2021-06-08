@@ -8,7 +8,7 @@ class Footer extends React.Component {
     };
   }
   componentDidMount() {
-    fetch("https://api.github.com/users/alexklick", {
+    fetch("https://api.github.com/users/"+ this.props.login, {
       method: "GET",
     })
       .then((response) => response.json())
