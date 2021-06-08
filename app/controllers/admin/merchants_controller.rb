@@ -1,6 +1,9 @@
 class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all.order(:name)
+    @enabled = @merchants.where(enabled: true)
+    @disabled = @merchants.where(enabled: false)
+    @top_5_merchants = Merchant.top_5_merchants
   end
 
   def show
@@ -22,9 +25,15 @@ class Admin::MerchantsController < ApplicationController
     redirect_to admin_merchant_path(merchant)
   end
 
+  def create
+    @merchant = Merchant.new(admin_merchant_params)
+    @merchant.save
+    redirect_to admin_merchants_path
+  end
+
   def enabled
     merchant = Merchant.find params[:id]
-    merchant.update(enabled: params[:merchant][:enabled])
+    merchant.update(enabled: params[:enabled])
     render json: {enabled: merchant.enabled}
   end
 

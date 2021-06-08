@@ -1,6 +1,3 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
-
 require_relative 'config/application'
 require 'csv'
 Rails.application.load_tasks
@@ -16,6 +13,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('customers')
     print "\n"
   end
 
@@ -29,6 +27,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
     print "\n"
   end
 
@@ -42,7 +41,8 @@ namespace :csv_load do
         i = i + 1
       end
     end
-  print "\n"
+    ActiveRecord::Base.connection.reset_pk_sequence!('items')
+    print "\n"
   end
 
   desc "load invoice_items csv"
@@ -55,6 +55,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
     print "\n"
   end
 
@@ -68,6 +69,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
     print "\n"
   end
 
@@ -81,6 +83,7 @@ namespace :csv_load do
         i = i + 1
       end
     end
+    ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
     print "\n"
   end
 
@@ -96,33 +99,50 @@ end
 desc "load test data csv's"
 task load_test_data: :environment do
   Rails.env = 'test'
-  Rake::Task['db:drop'].invoke
-  Rake::Task['db:create'].invoke
-  Rake::Task['db:migrate'].invoke
   files = {
-    'customers' => 'db/data/test_data/customers.csv',
-    'merchants' => 'db/data/test_data/merchants.csv',
-    'invoices' => 'db/data/test_data/invoices.csv',
-    'items' => 'db/data/test_data/items.csv',
-    'invoice_items' => 'db/data/test_data/invoice_items.csv',
-    'transactions' => 'db/data/test_data/transactions.csv',
+    'Customer' => 'db/data/test_data/customers.csv',
+    'Merchant' => 'db/data/test_data/merchants.csv',
+    'Invoice' => 'db/data/test_data/invoices.csv',
+    'Item' => 'db/data/test_data/items.csv',
+    'InvoiceItem' => 'db/data/test_data/invoice_items.csv',
+    'Transaction' => 'db/data/test_data/transactions.csv',
   }
   files.each do |table, filename|
-    csv = CSV.read(filename, headers: true)
-    headers = csv.headers
-    values_list = csv.map do |rows|
-      rows.values_at.map do |values|
-        ActiveRecord::Base.connection.quote(values)
+    csv = CSV.open(filename, 'a+') do |row|
+      if table == 'Customer' 
+        Customer.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'Merchant' 
+        Merchant.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'Invoice' 
+        Invoice.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'Item' 
+        Item.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      elsif table == 'InvoiceItem' 
+        InvoiceItem.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
+      else
+        Transaction.all.each do |customer|
+          attributes = customer.attributes 
+          row << attributes.values
+        end
       end
     end
-
-    ActiveRecord::Base.connection.execute <<-SQL
-      INSERT INTO #{table} (#{headers.join(",")}) VALUES
-      #{values_list.map { |values| "(#{values.join(",")})" }.join(", ")}
-    SQL
+    end
   end
-
-end
 
 desc 'load test data to database'
 task load_test_data_seed: :environment do
@@ -132,30 +152,33 @@ task load_test_data_seed: :environment do
   Rake::Task['db:migrate'].invoke
   customers = []
   items = []
-  50.times do
+  10.times do
     customers << Customer.create!(FactoryBot.attributes_for(:customer))
   end
 
-  50.times do
+  5.times do
     m = Merchant.create!(FactoryBot.attributes_for(:merchant))
+    items << m.items.create!(FactoryBot.attributes_for(:item))
+    items << m.items.create!(FactoryBot.attributes_for(:item))
+    items << m.items.create!(FactoryBot.attributes_for(:item))
     items << m.items.create!(FactoryBot.attributes_for(:item))
     items << m.items.create!(FactoryBot.attributes_for(:item))
   end
 
   customers.each do |customer|
-    rand(1..3).times do
-      item = items.sample
+    5.times do
       attrs = FactoryBot.attributes_for(:invoice)
-      attrs[:customer] = customer
-      invoice = item.invoices.create!(attrs)
-      InvoiceItem.find_by(invoice_id: invoice.id, item_id: item.id)
-                 .update(unit_price: item.unit_price, quantity: rand(0..5), status: rand(0..2))
+      attrs[:customer_id] = customer.id
+      invoice = Invoice.create!(attrs)
+      invoice.transactions.create!(FactoryBot.attributes_for(:transaction))
+      4.times do
+        item = items.sample
+        attrs = FactoryBot.attributes_for(:invoice_item)
+        attrs[:item_id] = item.id
+        attrs[:invoice_id] = invoice.id
+        InvoiceItem.create!(attrs)
+      end
     end
-  end
-
-  invoices = Invoice.all
-  invoices.each do |invoice|
-    invoice.transactions.create!(FactoryBot.attributes_for(:transaction))
   end
 end
 #

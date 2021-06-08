@@ -5,7 +5,6 @@ class Merchant extends React.Component {
     constructor(props) {
         super(props);
         this.state = {enabled: props.merchant.enabled}
-        // this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick = () => {
@@ -22,14 +21,12 @@ class Merchant extends React.Component {
 
     render () {
         const merchant = this.props.merchant
-        // this.setState({enabled: merchant.enabled})
         const url = this.props.url
-        let enabled = this.state.enabled
 
         return (
             <li key={merchant.id} id={ "merchant-" + merchant.id}>
-                <a className="merchant" href={url}>{merchant.name}</a>
-                {this.state.enabled ? <button onClick={this.handleClick}>Enabled</button> : <button onClick={this.handleClick}>Disabled</button> }
+                <a className="merchant" href={"/admin/merchants/" + merchant.id}>{merchant.name}</a>
+                {this.state.enabled ? <button onClick={this.handleClick}>Disable</button> : <button onClick={this.handleClick}>Enable</button> }
             </li>
         );
     }
@@ -37,7 +34,6 @@ class Merchant extends React.Component {
 
 Merchant.propTypes = {
     merchant: PropTypes.object,
-    url: PropTypes.string,
     auth_token: PropTypes.string
 };
 export default Merchant

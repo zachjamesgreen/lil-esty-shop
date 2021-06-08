@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/invoices/:id', to: 'merchants/invoices#show'
   namespace :admin do
     get '/', to: 'dashboard#index'
-    resources :merchants, only: [:index, :show, :edit, :update]
+    resources :merchants, only: [:index, :show, :edit, :update, :create]
     post '/merchants/:id/enabled', to: 'merchants#enabled'
     resources :invoices, only: [:index, :show]
   end
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get '/:id/items', to: 'items#index'
     get '/:id/items/:item_id', to: 'items#show'
     get '/:id/invoices', to: 'invoices#index'
-    get '/:id/invoices/:invoice_id', to: 'invoices#show'
+    get '/:id/invoices/:invoice_id', to: 'invoices#show', as: 'merch_invoice'
     get '/:id/items/:item_id/edit', to: 'items#edit'
     patch '/:id/items/:item_id', to: 'items#update'
     post '/:id/items', to: 'items#create'
