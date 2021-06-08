@@ -1,4 +1,4 @@
-id,name,created_at,updated_at
+id,name,created_at,updated_at, enabled
 1,Filiberto Lakin,2021-06-06 22:24:28 UTC,2021-06-06 22:24:28 UTC,true
 2,Drew Koelpin,2021-06-06 22:24:28 UTC,2021-06-06 22:24:28 UTC,true
 3,Kimberli Kunde,2021-06-06 22:24:28 UTC,2021-06-06 22:24:28 UTC,true
