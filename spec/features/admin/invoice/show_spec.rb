@@ -35,8 +35,6 @@ RSpec.describe 'Admin Invoice Show' do
     item = Item.find(3)
     ii = InvoiceItem.find(1)
 
-
-    # require 'pry'; binding.pry
     visit "/admin/invoices/#{invoice.id}"
     save_and_open_page
     expect(page).to have_content(item.name)
