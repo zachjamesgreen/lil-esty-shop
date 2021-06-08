@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LittleEtsyShop</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application' %>
-  </head>
+<head>
+  <title>LittleEtsyShop</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
   <body>
     <div id="page-contents">
@@ -56,17 +52,30 @@
       </div>
     <% end %>
     <div class="row justify-content-center">
-        <%= yield %>
-      </div>
+      <%= yield %>
     </div>
   </div>
-  <footer>
-    <%= react_component('Footer', { login:'alexklick'}) %>
-  </footer>
+
+  </div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+  <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;">Commits By Team Members</div>
+  <div class="card-body text-white bg-dark mb-3" style="max-width: 18rem;"><% commit_list = RepoCommits.new %>
+    <% commit_hash = commit_list.list_commits %>
+    <% commit_hash.each do |login, commits| %>
+    <p class="card-text"><%= "Team member: #{login} " %>
+      <%= "Has Pushed #{commits} commits"%></p>
+    <% end %></p>
+
+  </div>
 </body>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<footer>
+  <div class="container sticky-bottom">
+    <%= react_component('Footer') %>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/2dfacedc4b.js" crossorigin="anonymous"></script>
-  </body>
+
+</body>
+
 </html>
