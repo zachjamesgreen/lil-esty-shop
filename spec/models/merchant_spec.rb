@@ -8,11 +8,11 @@ RSpec.describe Merchant, type: :model do
   describe 'class methods' do
     describe '#top_5_merchants' do
       it 'returns the top 5 merchants by revenue' do
-        raven = Merchant.find 15
-        galina = Merchant.find 31
-        evia = Merchant.find 13
-        cole = Merchant.find 35
-        berry = Merchant.find 12
+        raven = Merchant.find 5
+        galina = Merchant.find 1
+        evia = Merchant.find 3
+        cole = Merchant.find 2
+        berry = Merchant.find 4
         merchants = Merchant.top_5_merchants
 
         expect(merchants).to eq [raven,galina,evia,cole,berry]
@@ -60,9 +60,8 @@ RSpec.describe Merchant, type: :model do
 
     describe '#top_day' do
       it 'returns the topday by revenue for a merchant' do
-        raven = Merchant.find 15
+        raven = Merchant.find 5
         top_day = raven.top_day.first.created_at
-        print top_day.class
         expect(top_day).to be_instance_of(ActiveSupport::TimeWithZone)
       end
     end
