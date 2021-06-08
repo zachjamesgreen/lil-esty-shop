@@ -4,11 +4,11 @@ describe 'Merchant Dashboard Page' do
 
   before(:all) do
     @merch = Merchant.find(1)
+    visit "/merchants/#{@merch.id}/dashboard"
   end
   # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
   # Then I see the name of my merchant
   it 'has the name of the merchant' do 
-    visit "/merchants/#{@merch.id}/dashboard"
     expect(page).to have_content(@merch.name)
   end
 
@@ -17,7 +17,6 @@ describe 'Merchant Dashboard Page' do
   # Then I see link to my merchant items index (/merchants/merchant_id/items)
   # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
   it 'has 2 links, to merchant items, and merchant invoices' do
-    visit "/merchants/#{@merch.id}/dashboard"
     expect(page).to have_link("Items")
     expect(page).to have_link("Invoices")
   end
@@ -29,31 +28,27 @@ describe 'Merchant Dashboard Page' do
   # And next to each customer name I see the number of successful transactions they have
   # conducted with my merchant
   it 'has the top 5 customers' do
-    visit "/merchants/#{@merch.id}/dashboard"
-    binding.pry
     within('#top_cust') do 
     #hardcoded as extra model test 
-      expect(page).to have_content('Salvatore	Deckow')
-      expect(page).to have_content('Rachell	Pfannerstill')
-      expect(page).to have_content('Otelia	Daniel')
-      expect(page).to have_content('Dean	Collins')
-      expect(page).to have_content('An	Mraz')
+      expect(page).to have_content('Salvatore Deckow')
+      expect(page).to have_content('Rachell Pfannerstill')
+      expect(page).to have_content('Otelia Daniel')
+      expect(page).to have_content('Dean Collins')
+      expect(page).to have_content('An Mraz')
     end
   end
 
-  it 'customers sorted by number successful transactions' do
-    
-  end
-
-  it 'shows number of successful transactions with merchant for the top 5 customers' do
+  it 'shows number of successful transactions with merchant for the top 5 customers, sorted by number successful transactions' do
     visit "/merchants/#{@merch.id}/dashboard"
-    within('#cust_table') do 
-    expect(page).to have_content(4)
-    expect(page).to have_content(3)
-    expect(page).to have_content(3)
-    expect(page).to have_content(3)
-    expect(page).to have_content(2)
-  end
+    within('#top_cust') do 
+      expect(page).to have_content(4)
+      expect(page).to have_content(2)
+      expect(page).to have_content(2)
+      expect(page).to have_content(1)
+      expect(page).to have_content(1)
+      expect('Otelia Daniel').to appear_before('Salvatore Deckow')
+      expect('Salvatore Deckow').to appear_before('Rachell Pfannerstill')
+    end
   end
   #   As a merchant
   # When I visit my merchant dashboard
