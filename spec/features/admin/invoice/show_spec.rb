@@ -14,7 +14,7 @@ RSpec.describe 'Admin Invoice Show' do
     customer = Customer.first
 
     visit "/admin/invoices/#{invoice.id}"
-
+    
     expect(page).to have_content(invoice.id)
     expect(page).to have_content(invoice.status)
     expect(page).to have_content(invoice.created_at.strftime("%A, %B %d, %Y"))
