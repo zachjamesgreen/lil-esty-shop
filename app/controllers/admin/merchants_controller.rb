@@ -3,6 +3,7 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all.order(:name)
     @enabled = @merchants.where(enabled: true)
     @disabled = @merchants.where(enabled: false)
+    @top_5_merchants = Merchant.top_5_merchants
   end
 
   def show
