@@ -4,5 +4,4 @@ class Merchants::DashboardController < ApplicationController
     @customers = Customer.top_five(params[:id])
     @items_pending = InvoiceItem.merch_not_shipped(params[:id])
   end
-
 end

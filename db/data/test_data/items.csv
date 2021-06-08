@@ -1,4 +1,4 @@
-id,name,description,merchant_id,created_at,updated_at,unit_price
+id,name,description,merchant_id,created_at,updated_at,status,unit_price
 1,Durable Paper Bench,Magni eum ipsum. Consequatur dolore tempore. Quia et asperiores.,1,2021-06-08 00:29:24 UTC,2021-06-08 00:29:24 UTC,enabled,13.19
 2,Rustic Bronze Lamp,Enim et nobis. Vero deserunt dolore. Quasi magnam non.,1,2021-06-08 00:29:24 UTC,2021-06-08 00:29:24 UTC,enabled,70.21
 3,Ergonomic Cotton Plate,Vero neque ea. Ex excepturi occaecati. Illo et veritatis.,1,2021-06-08 00:29:24 UTC,2021-06-08 00:29:24 UTC,enabled,57.99
