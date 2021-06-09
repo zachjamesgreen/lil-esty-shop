@@ -16,7 +16,7 @@ describe 'Merchant Items Index' do
 
   it 'lists the five most popular items' do
     expect(page).to have_content("Nina Mayert's 5 Top-Revenue Items")
-    save_and_open_page
+    
     within('div#top_items') do
       expect(page).to have_content('Small Aluminum Table')
       expect('Small Aluminum Table').to appear_before('Rustic Bronze Lamp')
@@ -56,7 +56,7 @@ describe 'Merchant Items Index' do
     expect(page).to have_button('Enable')
   end
 
-  it 'clicking enable changes status' do 
+  it 'clicking enable changes status' do
     id = @items_1.first.id
     within("#disable-#{id}") do
       click_button('Disable')

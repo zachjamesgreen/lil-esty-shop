@@ -31,15 +31,27 @@ RSpec.describe 'Admin Invoice Show' do
   # The Invoice Item status
   it 'shows the items attributes' do
     invoice = Invoice.first
-    customer = Customer.first
-    item = Item.find(3)
-    ii = InvoiceItem.find(1)
+    # customer = Customer.first
+    # item = Item.find(3)
+    # ii = InvoiceItem.find(1)
 
     visit "/admin/invoices/#{invoice.id}"
     
-    expect(page).to have_content(item.name)
-    expect(page).to have_content(ii.quantity)
-    expect(page).to have_content(ii.unit_price)
-    expect(page).to have_content(ii.status)
+    expect(page).to have_content(invoice.items[0].name)
+    expect(page).to have_content(invoice.items[1].name)
+    expect(page).to have_content(invoice.items[2].name)
+    expect(page).to have_content(invoice.items[3].name)
+    expect(page).to have_content(invoice.invoice_items[0].quantity)
+    expect(page).to have_content(invoice.invoice_items[1].quantity)
+    expect(page).to have_content(invoice.invoice_items[2].quantity)
+    expect(page).to have_content(invoice.invoice_items[3].quantity)
+    expect(page).to have_content(invoice.invoice_items[0].unit_price)
+    expect(page).to have_content(invoice.invoice_items[1].unit_price)
+    expect(page).to have_content(invoice.invoice_items[2].unit_price)
+    expect(page).to have_content(invoice.invoice_items[3].unit_price)
+    expect(page).to have_content(invoice.invoice_items[0].status)
+    expect(page).to have_content(invoice.invoice_items[1].status)
+    expect(page).to have_content(invoice.invoice_items[2].status)
+    expect(page).to have_content(invoice.invoice_items[3].status)
   end
 end
