@@ -26,15 +26,21 @@ RSpec.describe 'merchant invoice show page' do
   # As a merchant
   # When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
   # Then I see information related to that invoice including:
-  
   # Invoice id
   # Invoice status
   # Invoice created_at date in the format "Monday, July 18, 2019"
   # Customer first and last name
 
   it 'has the invoice id, status, date created formatted, customer first and last name' do
-    
-
+    invoice = Invoice.all[10]
+    items = Invoice.from_merch(invoice.id)
+    customer = Customer.find(invoice.customer_id)
+    visit "merchants/#{items[0].merchant_id}/invoices/#{invoice.id}"
+    expect(page).to have_content(invoice.id)
+    expect(page).to have_content(invoice.status)
+    expect(page).to have_content(invoice.formatted_time)
+    expect(page).to have_content(customer.first_name)
+    expect(page).to have_content(customer.last_name)
   end
 
   #   Merchant Invoice Show Page: Invoice Item Information
@@ -69,7 +75,14 @@ RSpec.describe 'merchant invoice show page' do
     invoice = Invoice.all[10]
     items = Invoice.from_merch(invoice.id)
     visit "merchants/#{items[0].merchant_id}/invoices/#{invoice.id}"
-    binding.pry
+    within('.table') do
+#map item statuses and status btn values, check too see if matches
+      statuses = items.map{|item| item.status}
+      btn_values = page.all('button').each_with_index.map{ |btn, i|  statuses[1] == btn.text}
+      btn_values.each do |val|
+        expect(val).to eq true
+      end
+    end
   end
 
   # When I click this select field,
@@ -80,8 +93,14 @@ RSpec.describe 'merchant invoice show page' do
   # And I see that my Item's status has now been updated
 
   it 'allows changing the item status' do
-    
-
+    invoice = Invoice.all[10]
+    items = Invoice.from_merch(invoice.id)
+    visit "merchants/#{items[0].merchant_id}/invoices/#{invoice.id}"
+    first('.status').click_button
+    within('.dropdown-menu') do
+      click_link('shipped')
+    end
+    expect(first('.status').text).to eq 'shipped'
   end
 
 end
