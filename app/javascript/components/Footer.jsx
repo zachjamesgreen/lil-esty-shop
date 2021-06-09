@@ -7,7 +7,7 @@ class Footer extends React.Component {
       github_data: [
         // edit linkedin and names
         {
-          "linkedin-url-b": ["zacksemail@gmail.com", "Zach Green"],
+          "zachjamesgreen": ["zacksemail@gmail.com", "Zach Green"],
           "alex-klick": ["aklick12@gmail.com", "Alex Klick"],
           "linkedin-url-c": ["noahemail@gmail.com", "Noah Zinter"],
           "linkedin-url-d": ["zackemails@gmail.com", "Zach Trokey"],
@@ -61,10 +61,12 @@ class Footer extends React.Component {
     });
     console.log(this.state.github_data[0]);
     return (
-      <div className="col-12 mt-4 pt-2 mb-2 px-2 g-0 ">
+      <div className="col-12 mt-4 pt-4 mb-2 px-4">
         <div className="col-2 mx-auto">
           <div className="">
-            <h5 style={{ color: "rgb(240, 242, 245)" }}>Connect With Our Devs</h5>
+            <h5 style={{ color: "rgb(240, 242, 245)" }}>
+              Connect With Our Devs
+            </h5>
           </div>
         </div>
         <div className="row justify-content-center">{users}</div>
