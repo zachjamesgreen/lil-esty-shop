@@ -13,7 +13,12 @@ RSpec.describe Merchant, type: :model do
         chi = Merchant.find 2
         nina = Merchant.find 1
         theo = Merchant.find 3
-        merchants = Merchant.top_5_merchants
+        #raven = Merchant.find 5
+        #galina = Merchant.find 1
+        #evia = Merchant.find 3
+        #cole = Merchant.find 2
+        #berry = Merchant.find 4
+        #merchants = Merchant.top_5_merchants
 
         expect(merchants).to eq [nicol, tad, chi, nina, theo]
       end
@@ -45,6 +50,10 @@ RSpec.describe Merchant, type: :model do
         nicol = Merchant.find 5
         top_day = nicol.top_day.first.created_at
         print top_day.class
+        
+        #raven = Merchant.find 5
+        #top_day = raven.top_day.first.created_at
+        
         expect(top_day).to be_instance_of(ActiveSupport::TimeWithZone)
       end
     end

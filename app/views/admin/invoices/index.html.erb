@@ -6,5 +6,11 @@
     <h1>Admin Invoice Index</h1>
   </div>
 
+  <div class="row">
+    <% @invoices.each do |i| %>
+      <p><%= link_to "Invoice #{i.id}", admin_invoice_path(i.id) %></p>
+    <% end %>
+  </div>
+
 </div>
 

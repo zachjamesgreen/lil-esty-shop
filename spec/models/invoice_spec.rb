@@ -12,7 +12,7 @@ RSpec.describe Invoice, type: :model do
     describe 'incomplete_invoices' do
       it 'gives invoices that are incomplete' do
         data = Invoice.incomplete_invoices
-        expect(data.count).to eq 27
+        expect(data.count).to eq 17
         test = data[0].created_at < data[1].created_at
         expect(test).to eq true
       end
