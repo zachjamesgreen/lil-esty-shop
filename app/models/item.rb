@@ -13,7 +13,8 @@ class Item < ApplicationRecord
       select('merchants.id, items.*, invoice_items.quantity, invoice_items.status')
       .joins(invoice_items: :invoice)
       .where('merchants.id = ?', merchant_id )}
-  def top_day
+
+      def top_day
       date_string = invoices.joins(:invoice_items, :transactions)
       .where("transactions.result = 2")
       .select("invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue")

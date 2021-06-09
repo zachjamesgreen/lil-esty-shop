@@ -7,10 +7,10 @@ class Footer extends React.Component {
       github_data: [
         // edit linkedin and names
         {
-          "linkedin-url-b": ["zacksemail@gmail.com", "Zach Green"],
-          "linkedin-url-c": ["noah.zinter@gmail.com", "Noah Zinter"],
+          "zachjamesgreen": ["zachjamesgreen@gmail.com", "Zach Green"],
+          "noah-zinter-267b58208": ["noah.zinter@gmail.com", "Noah Zinter"],
           "alex-klick": ["aklick12@gmail.com", "Alex Klick"],
-          "linkedin-url-d": ["ztrokey@gmail.com", "Zach Trokey"],
+          "zach-trokey-853582127": ["ztrokey@gmail.com", "Zach Trokey"],
         },
       ],
     };
