@@ -26,9 +26,9 @@ class Item < ApplicationRecord
   end
 
   def self.from_merch(params)
-    select(' items.*, invoice_items.*, items.status')
+    select('items.name, items.id, invoice_items.*')
     .joins(invoice_items: :invoice)
-    .where('invoices.id =?', params[:invoice_id])
+    .where('invoices.id = ?', params[:invoice_id])
     .where('items.merchant_id = ?', params[:id])
   end
 
