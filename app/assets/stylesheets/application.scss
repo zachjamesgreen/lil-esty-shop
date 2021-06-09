@@ -15,13 +15,16 @@
  */
 
 @import "bootstrap";
-@import "rails_bootstrap_forms";
+
 #page-contents {
-  min-height: 80%;
-  min-height: 80vh;
+  min-height: 100vh;
 }
 
 footer {
   background-color: rgb(38, 38, 38);
   bottom: 0;
+}
+.footer p {
+  /* Selects text inside a <p> tag that is inside a .footer <div> */
+  margin-bottom: 0; /* removes default <p> tag margin from the bottom */
 }
