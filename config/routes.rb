@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'merchant#index'
-
+  root to: 'admin/dashboard#index'
+  patch '/invoice_items/:invoice_item_id/:status', to: 'invoice_items#update', as: "invoice_item_patch"
   get '/items/:id', to: 'merchants/items#show'
   get '/invoices/:id', to: 'merchants/invoices#show'
   namespace :admin do
@@ -13,10 +13,12 @@ Rails.application.routes.draw do
 
   namespace :merchants do
     get '/:id/dashboard', to: 'dashboard#index'
-    get '/:id/items', to: 'items#index'
-    get '/:id/items/:item_id', to: 'items#show'
+
     get '/:id/invoices', to: 'invoices#index'
     get '/:id/invoices/:invoice_id', to: 'invoices#show', as: 'merch_invoice'
+    patch '/:id/invoice_items/:invoice_item_id', to: 'invoices#show', as: 'patch_invoice_item'
+
+    get '/:id/items', to: 'items#index'
     get '/:id/items/:item_id/edit', to: 'items#edit'
     patch '/:id/items/:item_id', to: 'items#update'
     post '/:id/items', to: 'items#create'

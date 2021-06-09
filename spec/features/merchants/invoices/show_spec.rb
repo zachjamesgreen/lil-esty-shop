@@ -64,6 +64,14 @@ RSpec.describe 'merchant invoice show page' do
   # When I visit my merchant invoice show page
   # I see that each invoice item status is a select field
   # And I see that the invoice item's current status is selected
+
+  it 'has the invoice item status as a select field, set to current status' do
+    invoice = Invoice.all[10]
+    items = Invoice.from_merch(invoice.id)
+    visit "merchants/#{items[0].merchant_id}/invoices/#{invoice.id}"
+    binding.pry
+  end
+
   # When I click this select field,
   # Then I can select a new status for the Item,
   # And next to the select field I see a button to "Update Item Status"
@@ -71,5 +79,9 @@ RSpec.describe 'merchant invoice show page' do
   # I am taken back to the merchant invoice show page
   # And I see that my Item's status has now been updated
 
+  it 'allows changing the item status' do
+    
+
+  end
 
 end

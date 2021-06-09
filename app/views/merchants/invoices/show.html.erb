@@ -19,24 +19,33 @@
         <br>
       </div>
       <div class="card-body" style="background-color: rgb(217, 221, 222)">
-        <!-- will eventually build as a react component for search and see pet info as modal -->
         <table class="table table-bordered">
           <tr>
             <th scope="col">#</th>
             <th>Name</th>
             <th>quantity</th>
             <th>status</th>
-            <th>price</th>
-            <th>id</th>
+            <th></th>
           </tr>
           <% @items.each_with_index do |item, index| %>
             <tr>
               <th scope="row"><%=index + 1%></th>
-              <td><%= item.name %></td>
+              <td><%= @merchant.id %></td>
               <td><%= item.quantity %></td>
-              <td> <%= item.status %></td>
+              <td>       
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle float-left" type="button" data-toggle="dropdown">
+                    <%= item.status %>
+                  <span class="caret"></span></button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% @items.statuses.keys().each do |status| %>
+                      <%= link_to status, "/invoice_items/#{item.id}/#{status}", method: :patch, params: {status: status}, :class=>"dropdown-item"%>
+                      
+                    <% end %>
+                  </div>
+                </div>
+            </td>
               <td>$<%= item.convert_dollars %></td>
-              <td> <%= item.id %></td>
             </tr>
           <% end %>
         </table>
