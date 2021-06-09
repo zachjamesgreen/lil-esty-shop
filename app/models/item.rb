@@ -8,6 +8,13 @@ class Item < ApplicationRecord
 
   validates :name, :description, :unit_price, presence: true
 
+
+
+  scope :from_merch, ->(merchant_id) {    
+      select('merchants.id, items.*, invoice_items.quantity, invoice_items.status')
+      .joins(invoice_items: :invoice)
+      .where('merchants.id = ?', merchant_id )}
+
   def top_day
       date_string = invoices.joins(:invoice_items, :transactions)
       .where("transactions.result = 2")

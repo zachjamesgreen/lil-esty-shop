@@ -8,9 +8,10 @@ class Footer extends React.Component {
         // edit linkedin and names
         {
           "zachjamesgreen": ["zacksemail@gmail.com", "Zach Green"],
+          "noah-zinter-267b58208": ["noah.zinter@gmail.com", "Noah Zinter"],
           "alex-klick": ["aklick12@gmail.com", "Alex Klick"],
-          "linkedin-url-c": ["noahemail@gmail.com", "Noah Zinter"],
-          "linkedin-url-d": ["zackemails@gmail.com", "Zach Trokey"],
+          "zach-trokey-853582127": ["ztrokey@gmail.com", "Zach Trokey"],
+
         },
       ],
     };
