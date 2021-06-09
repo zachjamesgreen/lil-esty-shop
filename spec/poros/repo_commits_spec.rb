@@ -13,7 +13,7 @@ describe RepoCommits do
       "id"=>77814101,
       "contributions"=>39},
       {"login"=>"timomitchel",
-      "id"=>23040094, 
+      "id"=>23040094,
       "contributions"=>9},
       {"login"=>"AlexKlick",
       "id"=>60951642,
@@ -28,6 +28,7 @@ describe RepoCommits do
   end
 
   it 'returns a hash of collaborators and their commit numbers' do
+    require 'pry'; binding.pry
     expect(@commits).is_a? Hash
     expect(@commits).to have_key('NoahZinter')
     expect(@commits['NoahZinter']).to eq 39
