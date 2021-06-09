@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LittleEtsyShop</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application' %>
-  </head>
-
+<head>
+  <title>LittleEtsyShop</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application' %>
   <body>
-    <div id="page-contents">
-
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgb(59, 87, 105)">
-      <a class="navbar-brand" href="/">
-        <img src="https://img-premium.flaticon.com/png/512/2673/2673880.png?token=exp=1622744139~hmac=dc5548b1df5a6b7706747e6ff24b73b3" style="max-width: 55px; max-height:auto;"alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/" style="color: rgb(217, 221, 222);">Home </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgb(217, 221, 222);" >
-              Merchants
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <div class="dropdown-divider"></div>
-              <%= link_to "Dashboard", "/admin", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgb(217, 221, 222);" >
-              Admin
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Dashboard", "/admin", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Merchants", "/admin/merchants", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
-              <%= link_to "Invoices", "/admin/merchants", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
-            </div>
-          </li>
-        </ul>
+  <div id="page-contents g-0">
+      <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgb(59, 87, 105)">
+        <a class="navbar-brand" href="/">
+          <img src="https://img-premium.flaticon.com/png/512/2673/2673880.png?token=exp=1622744139~hmac=dc5548b1df5a6b7706747e6ff24b73b3" style="max-width: 55px; max-height:auto;"alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/" style="color: rgb(217, 221, 222);">Home </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgb(217, 221, 222);" >
+                Merchants
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Apply to Adopt", "/app/new", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Current Applicants", "/app
+                ", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgb(217, 221, 222);" >
+                Admin
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Apply to Adopt", "/app/new", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Current Applicants", "/app
+                ", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
+              </div>
+            </li>
+          </ul>
+          <!-- dd form later, currently not using to pass capybara -->
+          <!-- <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form> -->
+        </div>
+      </nav>
+      <div class="container">
+        <% flash.each do |type, msg| %>
+        <div>
+          <%= msg %>
+        </div>
+      <% end %>
+      <div class="row justify-content-center">
+          <%= yield %>
+        </div>
       </div>
-    </nav>
-    <div class="container">
-      <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
-    <div class="row justify-content-center">
-        <%= yield %>
-      </div>
-    </div>
   </div>
-  <footer>
-    <%= react_component('Footer', { login:'alexklick'}) %>
-  </footer>
-</body>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <footer >
+    <div id="footer-div"> 
+      <%= react_component('Footer') %>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/2dfacedc4b.js" crossorigin="anonymous"></script>
   </body>
+
 </html>

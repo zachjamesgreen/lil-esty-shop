@@ -7,10 +7,11 @@ class InvoiceItem < ApplicationRecord
   def self.merch_not_shipped(merch_id)
     select('invoice_items.*, merchants.id as merch_id, items.name as name, invoices.id as invoice_id')
     .joins(item: :merchant)
-    .joins(:invoice)
+    .joins(invoice: :transactions)
     .order(created_at: :asc)
     .where.not(status: 2)
     .where('merchants.id = ?', merch_id)
+    .where.not('transactions.result = ?', 1)
   end
 
 end
