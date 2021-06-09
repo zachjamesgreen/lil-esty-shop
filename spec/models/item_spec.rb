@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
     describe '#top_day' do
       it 'returns top selling date' do
         merchant = Merchant.find(1)
-        item = merchant.top_five.first
+        item = merchant.top_five_items.first
 
         expect(item.top_day).is_a? Date
       end
