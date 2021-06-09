@@ -28,11 +28,9 @@ describe RepoCommits do
   end
 
   it 'returns a hash of collaborators and their commit numbers' do
-    require 'pry'; binding.pry
     expect(@commits).is_a? Hash
     expect(@commits).to have_key('NoahZinter')
     expect(@commits['NoahZinter']).to eq 39
-    # binding.pry
   end
 
   it 'does not include excluded ids' do
