@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     resources :merchants, only: [:index, :show, :edit, :update, :create]
     post '/merchants/:id/enabled', to: 'merchants#enabled'
-    resources :invoices, only: [:index, :show]
+    resources :invoices, only: [:index, :show, :update]
   end
 
   namespace :merchants do
