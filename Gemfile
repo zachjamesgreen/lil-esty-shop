@@ -71,3 +71,5 @@ gem 'jquery-rails'
 gem 'webpacker'
 gem 'react-rails'
 gem 'bootstrap', '~> 5.0.1'
+
+gem "bootstrap_form", "~> 4.0"

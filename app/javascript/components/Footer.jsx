@@ -8,9 +8,9 @@ class Footer extends React.Component {
         // edit linkedin and names
         {
           "linkedin-url-b": ["zacksemail@gmail.com", "Zach Green"],
-          "linkedin-url-c": ["noah.zinter@gmail.com", "Noah Zinter"],
           "alex-klick": ["aklick12@gmail.com", "Alex Klick"],
-          "linkedin-url-d": ["ztrokey@gmail.com", "Zach Trokey"],
+          "linkedin-url-c": ["noahemail@gmail.com", "Noah Zinter"],
+          "linkedin-url-d": ["zackemails@gmail.com", "Zach Trokey"],
         },
       ],
     };
@@ -64,7 +64,7 @@ class Footer extends React.Component {
       <div className="col-12 mt-4 pt-2 mb-2 px-2 g-0 ">
         <div className="col-2 mx-auto">
           <div className="">
-            <h5 style={{ color: "rgb(240, 242, 245)" }}>Hire Our Devs</h5>
+            <h5 style={{ color: "rgb(240, 242, 245)" }}>Connect With Our Devs</h5>
           </div>
         </div>
         <div className="row justify-content-center">{users}</div>
