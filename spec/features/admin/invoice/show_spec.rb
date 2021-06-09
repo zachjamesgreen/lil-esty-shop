@@ -31,12 +31,9 @@ RSpec.describe 'Admin Invoice Show' do
   # The Invoice Item status
   it 'shows the items attributes' do
     invoice = Invoice.first
-    # customer = Customer.first
-    # item = Item.find(3)
-    # ii = InvoiceItem.find(1)
-
-    visit "/admin/invoices/#{invoice.id}"
     
+    visit "/admin/invoices/#{invoice.id}"
+
     expect(page).to have_content(invoice.items[0].name)
     expect(page).to have_content(invoice.items[1].name)
     expect(page).to have_content(invoice.items[2].name)
