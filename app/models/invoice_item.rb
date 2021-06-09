@@ -13,5 +13,4 @@ class InvoiceItem < ApplicationRecord
     .where('merchants.id = ?', merch_id)
     .where.not('transactions.result = ?', 1)
   end
-
 end

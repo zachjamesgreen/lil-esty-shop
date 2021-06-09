@@ -6,10 +6,10 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': false %>
   <%= javascript_pack_tag 'application' %>
   <body>
-  <div id="page-contents g-0">
+  <div id="page-contents">
       <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgb(59, 87, 105)">
         <a class="navbar-brand" href="/">
           <img src="https://img-premium.flaticon.com/png/512/2673/2673880.png?token=exp=1622744139~hmac=dc5548b1df5a6b7706747e6ff24b73b3" style="max-width: 55px; max-height:auto;"alt="">
@@ -37,7 +37,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgb(217, 221, 222);" >
                 Admin
-              </a>
+              </a>>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <%= link_to "Apply to Adopt", "/app/new", :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
                 <div class="dropdown-divider"></div>
@@ -69,7 +69,6 @@
       <%= react_component('Footer') %>
     </div>
 </footer>
-
   <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
     <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;"><h3><%= "#{RepoName.repo_name}" %></h3></div>
     <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;">Commits By Team Members</div>
@@ -81,11 +80,9 @@
       <% end %></p>
     </div>
   </div>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/2dfacedc4b.js" crossorigin="anonymous"></script>
   </body>
-
+    <script src="https://kit.fontawesome.com/2dfacedc4b.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

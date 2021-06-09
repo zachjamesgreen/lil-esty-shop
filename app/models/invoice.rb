@@ -15,11 +15,18 @@ class Invoice < ApplicationRecord
   end
 
   def revenue
-    invoice_items.sum('quantity * unit_price')
+    invoice_items.sum('quantity * unit_price') /100
   end
   def self.merchant_invoices(merchant_id)
     select('DISTINCT invoices.*')
     .joins(invoice_items: :item)
     .where('items.merchant_id = ?', merchant_id)
+  end
+
+  def self.from_merch(invoice_id)
+    find(invoice_id)
+    .invoice_items
+    .select('invoice_items.* ,items.name, items.merchant_id')
+    .joins(:item)
   end
 end
