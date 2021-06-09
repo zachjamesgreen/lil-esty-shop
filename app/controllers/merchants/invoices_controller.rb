@@ -7,7 +7,6 @@ class Merchants::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:invoice_id])
     @merchant = Merchant.find(params[:id])
     @customer = Customer.find(@invoice.customer_id)
-    @items = Item.from_merch(params)
-    binding.pry
+    @items = Invoice.from_merch(params[:invoice_id])
   end
 end

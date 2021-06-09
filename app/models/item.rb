@@ -25,14 +25,4 @@ class Item < ApplicationRecord
       date_string.to_date
   end
 
-  def self.from_merch(params)
-    select('items.name, items.id, invoice_items.*')
-    .joins(invoice_items: :invoice)
-    .where('invoices.id = ?', params[:invoice_id])
-    .where('items.merchant_id = ?', params[:id])
-  end
-
-  def convert_dollars
-    unit_price.to_f/100
-  end
 end
