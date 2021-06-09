@@ -21,9 +21,4 @@ class Customer < ApplicationRecord
     .limit(5)
   end
 
-  def self.whos_invoice(invoice_id)
-    joins(:invoices)
-    .where('invoices.id = ?', invoice_id)
-    .first
-  end
 end

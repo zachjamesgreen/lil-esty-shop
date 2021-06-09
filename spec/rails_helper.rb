@@ -60,7 +60,7 @@ RSpec.configure do |config|
       "id"=>77814101,
       "contributions"=>39},
       {"login"=>"timomitchel",
-      "id"=>23040094, 
+      "id"=>23040094,
       "contributions"=>9},
       {"login"=>"AlexKlick",
       "id"=>60951642,
@@ -70,6 +70,15 @@ RSpec.configure do |config|
       "contributions"=>50}
     ]
     class_double('GithubService', :retrieve_stats => @hash_array).as_stubbed_const
+  end
+
+  config.before(:each) do
+    @github_data = {
+      "id": 373926639,
+      "node_id": "MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=",
+      "name": "lil-esty-shop"}
+
+    class_double('GithubService', :retrieve_name => @github_data).as_stubbed_const
   end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
