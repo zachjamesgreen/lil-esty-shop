@@ -15,7 +15,7 @@ RSpec.describe 'Admin Dashboard' do
   it 'shows the top 5 customers by transaction and the transaction count' do
     visit '/admin'
     data = Customer.top_5_customers_by_transactions
-    binding.pry
+    
     data.each do |c|
       expect(page).to have_content("#{c.first_name} #{c.last_name} Transactions: #{c.transaction_count}")
     end

@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-#ActiveRecord::Schema.define(version: 2021_06_05_163003) do not sure keep
 ActiveRecord::Schema.define(version: 2021_06_07_165549) do
 
   # These are extensions that must be enabled in order to support this database
