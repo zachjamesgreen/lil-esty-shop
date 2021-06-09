@@ -1,6 +1,11 @@
 <h1>Admin Invoice Show</h1>
 
 <h1><%= @invoice.id %></h1>
-<p>Invoice Status: <%= @invoice.status %></p>
+
+<%= form_with model: [:admin, @invoice], method: 'patch', local: true do |f| %>
+  Invoice Status: <%= f.select :status, Invoice.statuses, selected: Invoice.statuses[@invoice.status] %>
+  <%= f.submit %>
+<% end %>
+
 <p>Created at: <%= @invoice_created_at %></p>
 <p>Customer: <%= (@invoice.customer.first_name + " " + @invoice.customer.last_name) %></p>
