@@ -18,7 +18,7 @@ RSpec.describe Merchant, type: :model do
         #evia = Merchant.find 3
         #cole = Merchant.find 2
         #berry = Merchant.find 4
-        #merchants = Merchant.top_5_merchants
+        merchants = Merchant.top_5_merchants
 
         expect(merchants).to eq [nicol, tad, chi, nina, theo]
       end
