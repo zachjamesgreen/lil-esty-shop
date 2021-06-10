@@ -67,6 +67,7 @@
   </div>
   <% if !Rails.env.test? %>
     <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+      Pull Requests: <%= GithubService.retrieve_pulls %>
       <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;"><h3><%= "#{RepoName.repo_name}" %></h3></div>
       <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;">Commits By Team Members</div>
       <div class="card-body text-white bg-dark mb-3" style="max-width: 18rem;"><% commit_list = RepoCommits.new %>
