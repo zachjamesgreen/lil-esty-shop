@@ -7,7 +7,7 @@ class RepoCommits
   def list_commits
     user_commits = Hash.new
     @hash_array.map do |hash|
-      if @ids.include?(hash['id'])
+      if @ids.include?(hash['id'].to_i)
         user_commits[hash["login"]] = hash["contributions"]
       end
     end

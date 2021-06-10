@@ -37,7 +37,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgb(217, 221, 222);" >
                 Admin
-              </a>>
+              </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <%= link_to "All Merchants", admin_merchants_path, :class => "dropdown-item", :style=>"color: rgb(105, 0, 0);"%>
                 <div class="dropdown-divider"></div>
@@ -65,22 +65,24 @@
         </div>
       </div>
   </div>
+  <% if !Rails.env.test? %>
+    <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+      <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;"><h3><%= "#{RepoName.repo_name}" %></h3></div>
+      <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;">Commits By Team Members</div>
+      <div class="card-body text-white bg-dark mb-3" style="max-width: 18rem;"><% commit_list = RepoCommits.new %>
+        <% commit_hash = commit_list.list_commits %>
+        <% commit_hash.each do |login, commits| %>
+        <p class="card-text"><%= "Team member: #{login} " %>
+          <%= "Has Pushed #{commits} commits"%></p>
+        <% end %></p>
+      </div>
+    </div>
+  <% end %>
   <footer >
     <div id="footer-div">
       <%= react_component('Footer') %>
     </div>
 </footer>
-  <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-    <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;"><h3><%= "#{RepoName.repo_name}" %></h3></div>
-    <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;">Commits By Team Members</div>
-    <div class="card-body text-white bg-dark mb-3" style="max-width: 18rem;"><% commit_list = RepoCommits.new %>
-      <% commit_hash = commit_list.list_commits %>
-      <% commit_hash.each do |login, commits| %>
-      <p class="card-text"><%= "Team member: #{login} " %>
-        <%= "Has Pushed #{commits} commits"%></p>
-      <% end %></p>
-    </div>
-  </div>
   </body>
     <script src="https://kit.fontawesome.com/2dfacedc4b.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

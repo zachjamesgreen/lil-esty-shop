@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe RepoCommits do
-  before :each do
+  before(:each) do
     @hash_array = [
       {"login"=>"zachjamesgreen",
       "id"=>7896916,
@@ -23,8 +23,15 @@ describe RepoCommits do
       "contributions"=>50}
     ]
     class_double('GithubService', :retrieve_stats => @hash_array).as_stubbed_const
-    repo = RepoCommits.new
-    @commits = repo.list_commits
+  end
+
+  before(:each) do
+    @github_data = {
+      "id": 373926639,
+      "node_id": "MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=",
+      "name": "lil-esty-shop"}
+
+    class_double('GithubService', :retrieve_name => @github_data).as_stubbed_const
   end
 
   it 'returns a hash of collaborators and their commit numbers' do

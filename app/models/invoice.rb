@@ -15,7 +15,7 @@ class Invoice < ApplicationRecord
   end
 
   def revenue
-    invoice_items.sum('quantity * unit_price') /100
+    invoice_items.sum('quantity * unit_price')
   end
   def self.merchant_invoices(merchant_id)
     select('DISTINCT invoices.*')
