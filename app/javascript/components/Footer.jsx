@@ -5,14 +5,11 @@ class Footer extends React.Component {
     super(props);
     this.state = {
       github_data: [
-        // edit linkedin and names
-        {
-          "zachjamesgreen": ["zacksemail@gmail.com", "Zach Green"],
-          "noah-zinter-267b58208": ["noah.zinter@gmail.com", "Noah Zinter"],
-          "alex-klick": ["aklick12@gmail.com", "Alex Klick"],
-          "zach-trokey-853582127": ["ztrokey@gmail.com", "Zach Trokey"],
-
-        },
+        ["alex-klick", "Alex Klick"],
+        ["zachjamesgreen", "Zach Green"],
+        ["noah-zinter-267b58208", "Noah Zinter"],
+        ["zach-trokey-853582127", "Zach Trokey"],
+        ,
       ],
     };
   }
@@ -50,24 +47,21 @@ class Footer extends React.Component {
               className="nav-link"
               href={
                 "https://www.linkedin.com/in/" +
-                Object.keys(this.state.github_data[0])[index]
+                this.state.github_data[0][index][0]
               }
             >
               <i className="fab fa-linkedin"> </i>{" "}
-              {Object.values(this.state.github_data[0])[index][1]}
+              {this.state.github_data[0][index][1]}
             </Link>
           </div>
         </div>
       );
     });
-    console.log(this.state.github_data[0]);
     return (
-      <div className="col-12 mt-4 pt-4 mb-2 px-4">
+      <div className="col-12 mt-4 pt-2 mb-2 px-2 g-0 ">
         <div className="col-2 mx-auto">
           <div className="">
-            <h5 style={{ color: "rgb(240, 242, 245)" }}>
-              Connect With Our Devs
-            </h5>
+            <h5 style={{ color: "rgb(240, 242, 245)" }}>Hire Our Devs</h5>
           </div>
         </div>
         <div className="row justify-content-center">{users}</div>
