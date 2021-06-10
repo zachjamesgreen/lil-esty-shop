@@ -5,13 +5,11 @@ class Footer extends React.Component {
     super(props);
     this.state = {
       github_data: [
-        // edit linkedin and names
-        [
-          ["alex-klick", "Alex Klick"],
-          ["zachjamesgreen", "Zach Green"],
-          ["noah-zinter-267b58208", "Noah Zinter"],
-          ["zach-trokey-853582127", "Zach Trokey"],
-        ],
+        ["alex-klick", "Alex Klick"],
+        ["zachjamesgreen", "Zach Green"],
+        ["noah-zinter-267b58208", "Noah Zinter"],
+        ["zach-trokey-853582127", "Zach Trokey"],
+        ,
       ],
     };
   }
