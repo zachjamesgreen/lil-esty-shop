@@ -80,6 +80,12 @@ RSpec.configure do |config|
 
     class_double('GithubService', :retrieve_name => @github_data).as_stubbed_const
   end
+
+  config.before(:each) do
+    @github_d = {}
+
+    class_double('GithubService', :retrieve_pulls => @github_d).as_stubbed_const
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
