@@ -52,4 +52,8 @@
       <% end %>
     </table>
   </div>
+  <div class='col' id='discount_link'>
+    <%= link_to "See all discounts for #{@merchant.name}",
+    merchants_discounts_path %>
+  </div>
 </div>
