@@ -1,15 +1,15 @@
+# frozen_string_literal: true
+
 class RepoCommits
   def initialize
-    @ids = [77814101]
+    @ids = [77_814_101]
     @hash_array = GithubService.retrieve_stats
   end
 
   def list_commits
-    user_commits = Hash.new
+    user_commits = {}
     @hash_array.map do |hash|
-      if @ids.include?(hash['id'].to_i)
-        user_commits[hash["login"]] = hash["contributions"]
-      end
+      user_commits[hash['login']] = hash['contributions'] if @ids.include?(hash['id'].to_i)
     end
     user_commits
   end

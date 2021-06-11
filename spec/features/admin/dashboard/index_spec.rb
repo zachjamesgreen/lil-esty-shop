@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Admin Dashboard' do
@@ -16,13 +18,13 @@ RSpec.describe 'Admin Dashboard' do
   xit 'shows the top 5 customers by transaction and the transaction count' do
     visit '/admin'
     data = Customer.top_5_customers_by_transactions
-    
+
     data.each do |c|
       expect(page).to have_content("#{c.first_name} #{c.last_name} Transactions: #{c.transaction_count}")
     end
   end
 
-# TODO make less static with the data
+  # TODO: make less static with the data
   xit 'shows incomplete invoices by created' do
     visit '/admin'
     expect(page).to have_content('Incomplete Invoices')

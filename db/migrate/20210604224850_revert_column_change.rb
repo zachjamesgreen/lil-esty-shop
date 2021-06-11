@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 class RevertColumnChange < ActiveRecord::Migration[5.2]
   def change
-
     change_table :invoice_items do |t|
       t.remove :unit_price
       t.money :unit_price, default: 0
@@ -10,6 +11,5 @@ class RevertColumnChange < ActiveRecord::Migration[5.2]
       t.remove :unit_price
       t.money :unit_price, default: 0
     end
-
   end
 end

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'merchant invoice Index page' do
-
   # Merchant Invoices Index
 
   # As a merchant,
@@ -16,10 +17,10 @@ RSpec.describe 'merchant invoice Index page' do
     invoice_not = [1, 3, 4, 6, 7]
     visit "/merchants/#{merch.id}/invoices"
     invoice_ids.each do |id|
-      expect(page).to have_link(id.to_s, :exact => true)
+      expect(page).to have_link(id.to_s, exact: true)
     end
     invoice_not.each do |id|
-      expect(page).to_not have_link(id.to_s, :exact => true)
+      expect(page).to_not have_link(id.to_s, exact: true)
     end
   end
 end

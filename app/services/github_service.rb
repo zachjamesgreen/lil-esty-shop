@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GithubService
   def self.retrieve_stats
     response = Faraday.get 'https://api.github.com/repos/noahzinter/bulk_discounts/contributors'

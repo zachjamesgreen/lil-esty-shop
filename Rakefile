@@ -1,86 +1,88 @@
+# frozen_string_literal: true
+
 require_relative 'config/application'
 require 'csv'
 Rails.application.load_tasks
 
 namespace :csv_load do
-  desc "load customer csv"
+  desc 'load customer csv'
   task customers: :environment do
     csv_path = 'db/data/customers.csv'
     i = 1
     CSV.foreach(csv_path, headers: true) do |row|
       if Customer.create! row.to_h
         print "#{i} Customer Records Done\r"
-        i = i + 1
+        i += 1
       end
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('customers')
     print "\n"
   end
 
-  desc "load invoices csv"
+  desc 'load invoices csv'
   task invoices: :environment do
     csv_path = 'db/data/invoices.csv'
     i = 1
     CSV.foreach(csv_path, headers: true) do |row|
       if Invoice.create! row.to_h
         print "#{i} Invoice Records Done\r"
-        i = i + 1
+        i += 1
       end
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
     print "\n"
   end
 
-  desc "load items csv"
+  desc 'load items csv'
   task items: :environment do
     csv_path = 'db/data/items.csv'
     i = 1
     CSV.foreach(csv_path, headers: true) do |row|
       if Item.create! row.to_h
         print "#{i} Item Records Done\r"
-        i = i + 1
+        i += 1
       end
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('items')
     print "\n"
   end
 
-  desc "load invoice_items csv"
+  desc 'load invoice_items csv'
   task invoice_items: :environment do
     csv_path = 'db/data/invoice_items.csv'
     i = 1
     CSV.foreach(csv_path, headers: true) do |row|
       if InvoiceItem.create! row.to_h
         print "#{i} InvoiceItem Records Done\r"
-        i = i + 1
+        i += 1
       end
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
     print "\n"
   end
 
-  desc "load merchants csv"
+  desc 'load merchants csv'
   task merchants: :environment do
     csv_path = 'db/data/merchants.csv'
     i = 1
     CSV.foreach(csv_path, headers: true) do |row|
       if Merchant.create! row.to_h
         print "#{i} Merchant Records Done\r"
-        i = i + 1
+        i += 1
       end
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
     print "\n"
   end
 
-  desc "load transactions csv"
+  desc 'load transactions csv'
   task transactions: :environment do
     csv_path = 'db/data/transactions.csv'
     i = 1
     CSV.foreach(csv_path, headers: true) do |row|
       if Transaction.create! row.to_h
         print "#{i} Transaction Records Done\r"
-        i = i + 1
+        i += 1
       end
     end
     ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
@@ -88,13 +90,13 @@ namespace :csv_load do
   end
 
   desc 'run all csv files'
-  task all: %W(customers merchants invoices items invoice_items transactions) do
+  task all: %w[customers merchants invoices items invoice_items transactions] do
     Rails.env = 'development'
     print "All CSV files loaded. \n"
   end
 end
 
-# TODO refactor below code to use a method
+# TODO: refactor below code to use a method
 
 desc "load test data csv's"
 task load_test_data: :environment do
@@ -105,44 +107,45 @@ task load_test_data: :environment do
     'Invoice' => 'db/data/test_data/invoices.csv',
     'Item' => 'db/data/test_data/items.csv',
     'InvoiceItem' => 'db/data/test_data/invoice_items.csv',
-    'Transaction' => 'db/data/test_data/transactions.csv',
+    'Transaction' => 'db/data/test_data/transactions.csv'
   }
   files.each do |table, filename|
     csv = CSV.open(filename, 'a+') do |row|
-      if table == 'Customer' 
+      case table
+      when 'Customer'
         Customer.all.each do |customer|
-          attributes = customer.attributes 
+          attributes = customer.attributes
           row << attributes.values
         end
-      elsif table == 'Merchant' 
+      when 'Merchant'
         Merchant.all.each do |customer|
-          attributes = customer.attributes 
+          attributes = customer.attributes
           row << attributes.values
         end
-      elsif table == 'Invoice' 
+      when 'Invoice'
         Invoice.all.each do |customer|
-          attributes = customer.attributes 
+          attributes = customer.attributes
           row << attributes.values
         end
-      elsif table == 'Item' 
+      when 'Item'
         Item.all.each do |customer|
-          attributes = customer.attributes 
+          attributes = customer.attributes
           row << attributes.values
         end
-      elsif table == 'InvoiceItem' 
+      when 'InvoiceItem'
         InvoiceItem.all.each do |customer|
-          attributes = customer.attributes 
+          attributes = customer.attributes
           row << attributes.values
         end
       else
         Transaction.all.each do |customer|
-          attributes = customer.attributes 
+          attributes = customer.attributes
           row << attributes.values
         end
       end
     end
-    end
   end
+end
 
 desc 'load test data to database'
 task load_test_data_seed: :environment do
@@ -189,22 +192,23 @@ task csv_test_seed: :environment do
   Rake::Task['db:create'].invoke
   Rake::Task['db:migrate'].invoke
   csv_paths = ['db/data/test_data/customers.csv',
-              'db/data/test_data/merchants.csv',
-              'db/data/test_data/invoices.csv',
-              'db/data/test_data/items.csv',
-              'db/data/test_data/invoice_items.csv',
-              'db/data/test_data/transactions.csv']
+               'db/data/test_data/merchants.csv',
+               'db/data/test_data/invoices.csv',
+               'db/data/test_data/items.csv',
+               'db/data/test_data/invoice_items.csv',
+               'db/data/test_data/transactions.csv']
   csv_paths.each do |path|
     CSV.foreach(path, headers: true) do |row|
-      if path == 'db/data/test_data/customers.csv'
+      case path
+      when 'db/data/test_data/customers.csv'
         Customer.create! row.to_h
-      elsif path == 'db/data/test_data/merchants.csv'
+      when 'db/data/test_data/merchants.csv'
         Merchant.create! row.to_h
-      elsif path == 'db/data/test_data/invoices.csv'
+      when 'db/data/test_data/invoices.csv'
         Invoice.create! row.to_h
-      elsif path == 'db/data/test_data/items.csv'
+      when 'db/data/test_data/items.csv'
         Item.create! row.to_h
-      elsif path == 'db/data/test_data/invoice_items.csv'
+      when 'db/data/test_data/invoice_items.csv'
         InvoiceItem.create! row.to_h
       else
         Transaction.create! row.to_h
@@ -212,7 +216,6 @@ task csv_test_seed: :environment do
     end
   end
 end
-
 
 #
 # psql -U zach -d little-etsy-shop_test -c "Copy (select * from customers) To STDOUT With CSV HEADER DELIMITER ',';" > ./db/data/test_data/customers.csv

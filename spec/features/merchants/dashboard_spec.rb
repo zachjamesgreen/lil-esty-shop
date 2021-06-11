@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Merchant Dashboard Page' do
-
   before(:all) do
     @merch = Merchant.find(1)
     visit "/merchants/#{@merch.id}/dashboard"
   end
   # When I visit my merchant dashboard (/merchants/merchant_id/dashboard)
   # Then I see the name of my merchant
-  it 'has the name of the merchant' do 
+  it 'has the name of the merchant' do
     expect(page).to have_content(@merch.name)
   end
 
@@ -17,10 +18,10 @@ describe 'Merchant Dashboard Page' do
   # Then I see link to my merchant items index (/merchants/merchant_id/items)
   # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
   it 'has 2 links, to merchant items, and merchant invoices' do
-    #for some reason isn't visiting page
+    # for some reason isn't visiting page
     visit "/merchants/#{@merch.id}/dashboard"
-    expect(page).to have_link("Items")
-    expect(page).to have_link("Invoices")
+    expect(page).to have_link('Items')
+    expect(page).to have_link('Invoices')
   end
 
   #   As a merchant,
@@ -31,8 +32,8 @@ describe 'Merchant Dashboard Page' do
   # conducted with my merchant
   it 'has the top 5 customers' do
     visit "/merchants/#{@merch.id}/dashboard"
-    within('#cust_table') do 
-    #hardcoded as extra model test 
+    within('#cust_table') do
+      # hardcoded as extra model test
       expect(page).to have_content('Salvatore Deckow')
       expect(page).to have_content('Rachell Pfannerstill')
       expect(page).to have_content('Otelia Daniel')
@@ -43,7 +44,7 @@ describe 'Merchant Dashboard Page' do
 
   it 'shows number of successful transactions with merchant for the top 5 customers, sorted by number successful transactions' do
     visit "/merchants/#{@merch.id}/dashboard"
-    within('#top_cust') do 
+    within('#top_cust') do
       expect(page).to have_content(4)
       expect(page).to have_content(2)
       expect(page).to have_content(2)
@@ -61,14 +62,14 @@ describe 'Merchant Dashboard Page' do
   it 'has a section for items ready to ship, with list of names of items to ship' do
     visit "/merchants/#{@merch.id}/dashboard"
     within('#ship_table') do
-     item_ids = [1,2,3,4,5]
+      item_ids = [1, 2, 3, 4, 5]
       item_ids.each do |id|
         name = Item.find(id).name
         expect(page).to have_content(name)
       end
     end
   end
- # And next to each Item I see the id of the invoice that ordered my item
+  # And next to each Item I see the id of the invoice that ordered my item
   # And each invoice id is a link to my merchant's invoice show page
   it 'each item has the id of the invoice, which is a link to the invoice show page' do
     visit "/merchants/#{@merch.id}/dashboard"
@@ -84,16 +85,14 @@ describe 'Merchant Dashboard Page' do
   # In the section for "Items Ready to Ship",
   # Next to each Item name I see the date that the invoice was created
   # And I see the date formatted like "Monday, July 18, 2019"
-##
+  ##
   it 'has the date of the invoice formatted' do
     visit "/merchants/#{@merch.id}/dashboard"
     within('#ship_table') do
-    
     end
   end
   ##
-  # And I see that the list is ordered from oldest to newest  
+  # And I see that the list is ordered from oldest to newest
   it 'list ordered from oldest to newest' do
-
   end
 end

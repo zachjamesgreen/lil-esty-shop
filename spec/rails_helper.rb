@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start
 
@@ -7,7 +9,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -48,47 +50,48 @@ end
 # Capybara.default_driver = :selenium_headless
 
 RSpec.configure do |config|
-  
   config.before(:each) do
-  @hash_array = [
-      {"login"=>"zachjamesgreen",
-      "id"=>7896916,
-      "contributions"=>54},
-      {"login"=>"BrianZanti",
-      "id"=>8962411,
-      "contributions"=>48},
-      {"login"=>"NoahZinter",
-      "id"=>77814101,
-      "contributions"=>39},
-      {"login"=>"timomitchel",
-      "id"=>23040094,
-      "contributions"=>9},
-      {"login"=>"AlexKlick",
-      "id"=>60951642,
-      "contributions"=>90},
-      {"login"=>"ztrokey",
-      "id"=>20480167,
-      "contributions"=>50}
+    @hash_array = [
+      { 'login' => 'zachjamesgreen',
+        'id' => 7_896_916,
+        'contributions' => 54 },
+      { 'login' => 'BrianZanti',
+        'id' => 8_962_411,
+        'contributions' => 48 },
+      { 'login' => 'NoahZinter',
+        'id' => 77_814_101,
+        'contributions' => 39 },
+      { 'login' => 'timomitchel',
+        'id' => 23_040_094,
+        'contributions' => 9 },
+      { 'login' => 'AlexKlick',
+        'id' => 60_951_642,
+        'contributions' => 90 },
+      { 'login' => 'ztrokey',
+        'id' => 20_480_167,
+        'contributions' => 50 }
     ]
     # class_double('GithubService', :retrieve_stats => @hash_array).as_stubbed_const
-      @github_data_2 = {
-      "id": 373926639,
-      "node_id": "MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=",
-      "name": "bulk_discounts"}
+    @github_data_2 = {
+      "id": 373_926_639,
+      "node_id": 'MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=',
+      "name": 'bulk_discounts'
+    }
 
-      # class_double('GithubService', :retrieve_pulls => @github_data_2).as_stubbed_const
-        
-      @github_data = {
-          "id": 375818246,
-          "node_id": "MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=",
-          "name": "bulk_discounts"}
-    
-        class_double('GithubService', :retrieve_name => @github_data, :retrieve_pulls => @github_data_2, :retrieve_stats => @hash_array).as_stubbed_const
+    # class_double('GithubService', :retrieve_pulls => @github_data_2).as_stubbed_const
+
+    @github_data = {
+      "id": 375_818_246,
+      "node_id": 'MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=',
+      "name": 'bulk_discounts'
+    }
+
+    class_double('GithubService', retrieve_name: @github_data, retrieve_pulls: @github_data_2,
+                                  retrieve_stats: @hash_array).as_stubbed_const
   end
 
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-    config.fixture_path = "#{::Rails.root}/spec/fixtures"
-    
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
   describe 'validations' do
-    it {should have_many(:invoices)}
+    it { should have_many(:invoices) }
   end
 
   describe 'class methods' do
@@ -10,9 +12,8 @@ RSpec.describe Customer, type: :model do
       it 'gives the top 5 customers by transactions' do
         data = Customer.top_5_customers_by_transactions
 
-        expect(data.map(&:first_name)).to match_array ['An', 'Dean', 'Lemuel', 'Lindsey', 'Vivan']
+        expect(data.map(&:first_name)).to match_array %w[An Dean Lemuel Lindsey Vivan]
         expect(data.map(&:transaction_count)).to match_array [2, 3, 3, 3, 4]
-
       end
     end
   end

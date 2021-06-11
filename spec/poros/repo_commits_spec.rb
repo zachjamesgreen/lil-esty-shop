@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe RepoCommits do
@@ -15,5 +17,4 @@ describe RepoCommits do
     expect(@commits.keys.include?('BriainZanti')).to eq false
     expect(@commits.keys).to eq(['NoahZinter'])
   end
-
 end
