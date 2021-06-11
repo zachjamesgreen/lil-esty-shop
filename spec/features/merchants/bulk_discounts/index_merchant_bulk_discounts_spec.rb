@@ -11,7 +11,12 @@ describe 'merchant bulk discounts index' do
   end
 
   it 'displays all bulk discounts' do
-    save_and_open_page
+    expect(page).to have_content('Discount Quantity Threshold: 10')
+    expect(page).to have_content('Discount Quantity Threshold: 15')
+    expect(page).to have_content('Discount Quantity Threshold: 20')
+    expect(page).to have_content('Discount Percentage: 20')
+    expect(page).to have_content('Discount Percentage: 25')
+    expect(page).to have_content('Discount Percentage: 30')
   end
 
   it 'displays the percentage discount' do
