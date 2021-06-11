@@ -89,4 +89,8 @@ describe 'Merchant Dashboard Page' do
   it 'contains a link to all merchant discounts' do
     expect(page).to have_link("See all discounts for #{@merch.name}")
   end
+
+  it 'clicking link travels to merchant discount index' do
+    
+  end
 end
