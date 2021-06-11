@@ -46,7 +46,7 @@
                   </div>
                 </div>
             </td>
-              <td>$<%= item.convert_dollars %></td>
+              <td>$<%= (item.unit_price.to_f) / 100 %></td>
             </tr>
           <% end %>
         </table>

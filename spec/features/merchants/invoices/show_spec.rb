@@ -64,7 +64,7 @@ RSpec.describe 'merchant invoice show page' do
     items.each do |item|
       expect(page).to have_content(item.name)
       expect(page).to have_content(item.quantity)
-      expect(page).to have_content(item.convert_dollars)
+      expect(page).to have_content((item.unit_price.to_f)/100)
       expect(page).to have_content(item.status)
     end
   end
