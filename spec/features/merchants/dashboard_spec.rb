@@ -91,6 +91,10 @@ describe 'Merchant Dashboard Page' do
   end
 
   it 'clicking link travels to merchant discount index' do
-    
+    within('#discount_link') do
+      click_link("See all discounts for #{@merch.name}")
+    end
+
+    expect(current_path).to eq "/merchants/#{@merch.id}/discounts"
   end
 end
