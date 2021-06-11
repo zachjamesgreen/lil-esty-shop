@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Merchant Dashboard Page' do
-  before(:all) do
+  before(:each) do
     @merch = Merchant.find(1)
     visit "/merchants/#{@merch.id}/dashboard"
   end
@@ -18,8 +18,6 @@ describe 'Merchant Dashboard Page' do
   # Then I see link to my merchant items index (/merchants/merchant_id/items)
   # And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)
   it 'has 2 links, to merchant items, and merchant invoices' do
-    # for some reason isn't visiting page
-    visit "/merchants/#{@merch.id}/dashboard"
     expect(page).to have_link('Items')
     expect(page).to have_link('Invoices')
   end
@@ -31,7 +29,6 @@ describe 'Merchant Dashboard Page' do
   # And next to each customer name I see the number of successful transactions they have
   # conducted with my merchant
   it 'has the top 5 customers' do
-    visit "/merchants/#{@merch.id}/dashboard"
     within('#cust_table') do
       # hardcoded as extra model test
       expect(page).to have_content('Salvatore Deckow')
@@ -43,7 +40,6 @@ describe 'Merchant Dashboard Page' do
   end
 
   it 'shows number of successful transactions with merchant for the top 5 customers, sorted by number successful transactions' do
-    visit "/merchants/#{@merch.id}/dashboard"
     within('#top_cust') do
       expect(page).to have_content(4)
       expect(page).to have_content(2)
@@ -60,7 +56,6 @@ describe 'Merchant Dashboard Page' do
   # In that section I see a list of the names of all of my items that
   # have been ordered and have not yet been shipped,
   it 'has a section for items ready to ship, with list of names of items to ship' do
-    visit "/merchants/#{@merch.id}/dashboard"
     within('#ship_table') do
       item_ids = [1, 2, 3, 4, 5]
       item_ids.each do |id|
@@ -72,7 +67,6 @@ describe 'Merchant Dashboard Page' do
   # And next to each Item I see the id of the invoice that ordered my item
   # And each invoice id is a link to my merchant's invoice show page
   it 'each item has the id of the invoice, which is a link to the invoice show page' do
-    visit "/merchants/#{@merch.id}/dashboard"
     within('#ship_table') do
       invoice_ids = [44, 43, 35, 29, 29, 27, 21, 15, 8]
       invoice_ids.each do |id|
@@ -87,12 +81,12 @@ describe 'Merchant Dashboard Page' do
   # And I see the date formatted like "Monday, July 18, 2019"
   ##
   it 'has the date of the invoice formatted' do
-    visit "/merchants/#{@merch.id}/dashboard"
     within('#ship_table') do
+      expect(page).to have_content('June 08, 2021')
     end
   end
   ##
-  # And I see that the list is ordered from oldest to newest
-  it 'list ordered from oldest to newest' do
+  it 'contains a link to all merchant discounts' do
+    expect(page).to have_link("See all discounts for #{@merch.name}")
   end
 end

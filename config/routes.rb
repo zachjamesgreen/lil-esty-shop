@@ -25,5 +25,7 @@ Rails.application.routes.draw do
     get '/:id/invoices', to: 'invoices#index'
     get '/:id/invoices/:invoice_id', to: 'invoices#show', as: 'merch_invoice'
     patch '/:id/invoice_items/:invoice_item_id', to: 'invoices#show', as: 'patch_invoice_item'
+
+    get '/:id/discounts', to: 'discounts#index'
   end
 end
