@@ -20,18 +20,26 @@ describe 'merchant bulk discounts index' do
   end
 
   it 'displays the percentage discount' do
-
+    expect(page).to have_content('Discount Percentage: 20')
+    expect(page).to have_content('Discount Percentage: 25')
+    expect(page).to have_content('Discount Percentage: 30')
   end
 
   it 'displays the quantity threshold' do
-    
+    expect(page).to have_content('Discount Quantity Threshold: 10')
+    expect(page).to have_content('Discount Quantity Threshold: 15')
+    expect(page).to have_content('Discount Quantity Threshold: 20')
   end
 
   it 'has a link to each discount show page' do
-    
+    expect(page).to have_link('See Details for Discount Percentage: 20')
+    expect(page).to have_link('See Details for Discount Percentage: 25')
+    expect(page).to have_link('See Details for Discount Percentage: 30')
   end
 
   it 'clicking the link travels to show page' do
-    
+    click_link('See Details for Discount Percentage: 20')
+
+    expect(current_path).to eq "/merchants/#{@merchant.id}/bulk_discounts/#{@discount_1.id}"
   end
 end
