@@ -16,6 +16,6 @@ class GithubService
   def self.retrieve_pulls
     res = Faraday.get 'https://api.github.com/repos/noahzinter/bulk_discounts/pulls?state=all'
     body = res.body
-    h = JSON.parse(body).size
+    JSON.parse(body).size
   end
 end

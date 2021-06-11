@@ -2,7 +2,7 @@
 
 class RepoCommits
   def initialize
-    @ids = [77_814_101]
+    @ids = [77814101]
     @hash_array = GithubService.retrieve_stats
   end
 
