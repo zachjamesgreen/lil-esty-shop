@@ -96,5 +96,7 @@ describe 'Merchant Dashboard Page' do
     end
 
     expect(current_path).to eq "/merchants/#{@merch.id}/discounts"
+    save_and_open_page
+    expect(page).to have_content("All Discounts for #{@merch.name}")
   end
 end
