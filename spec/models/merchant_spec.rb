@@ -3,8 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  describe 'validations' do
+  describe 'relationships' do
     it { should have_many(:items) }
+    it { should have_many(:bulk_discounts) }
+    it { should have_many(:invoice_items).through(:items) }
   end
 
   describe 'class methods' do
@@ -15,11 +17,6 @@ RSpec.describe Merchant, type: :model do
         chi = Merchant.find 2
         nina = Merchant.find 1
         theo = Merchant.find 3
-        # raven = Merchant.find 5
-        # galina = Merchant.find 1
-        # evia = Merchant.find 3
-        # cole = Merchant.find 2
-        # berry = Merchant.find 4
         merchants = Merchant.top_5_merchants
 
         expect(merchants).to eq [nicol, tad, chi, nina, theo]
@@ -35,7 +32,7 @@ RSpec.describe Merchant, type: :model do
       @items_2 = @merchant_2.items
     end
 
-    describe '#top_five' do
+    describe '#top_five_items' do
       it 'returns the top five revenue generating items' do
         item_5 = Item.find 5
         item_4 = Item.find 4
@@ -51,9 +48,6 @@ RSpec.describe Merchant, type: :model do
         nicol = Merchant.find 5
         top_day = nicol.top_day.first.created_at
         print top_day.class
-
-        # raven = Merchant.find 5
-        # top_day = raven.top_day.first.created_at
 
         expect(top_day).to be_instance_of(ActiveSupport::TimeWithZone)
       end
