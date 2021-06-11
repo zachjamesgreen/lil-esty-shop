@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   describe 'relationships' do
-    it {should belong_to(:merchant)}
-    it {should have_many(:invoice_items)}
-    it {should have_many(:invoices).through(:invoice_items)}
+    it { should belong_to(:merchant) }
+    it { should have_many(:invoice_items) }
+    it { should have_many(:invoices).through(:invoice_items) }
   end
   describe 'validations' do
     it { should validate_presence_of(:name) }
@@ -12,7 +14,6 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:unit_price) }
   end
   describe 'instance methods' do
-    
     describe '#top_day' do
       it 'returns top selling date' do
         merchant = Merchant.find(1)

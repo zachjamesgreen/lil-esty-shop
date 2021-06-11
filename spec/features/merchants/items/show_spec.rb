@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'factory_bot_rails'
 
@@ -18,12 +20,12 @@ RSpec.describe 'merchant items show page' do
 
     visit "merchants/#{merchant_1.id}/items"
 
-    click_link "#{item_1.name}"
-    
+    click_link item_1.name.to_s
+
     expect(current_path).to eq("/merchants/#{merchant_1.id}/items/#{item_1.id}")
     expect(page).to have_content(item_1.name)
     expect(page).to have_content(item_1.description)
-    expect(page).to have_content("Price: $#{(item_1.unit_price/100).round(2)}")
+    expect(page).to have_content("Price: $#{(item_1.unit_price / 100).round(2)}")
   end
 
   # As a merchant,
@@ -51,7 +53,3 @@ RSpec.describe 'merchant items show page' do
     expect(page).to have_content('Awesome Plundger')
   end
 end
-
-
-
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Merchant Items Index' do
@@ -16,7 +18,7 @@ describe 'Merchant Items Index' do
 
   it 'lists the five most popular items' do
     expect(page).to have_content("Nina Mayert's 5 Top-Revenue Items")
-    
+
     within('div#top_items') do
       expect(page).to have_content('Small Aluminum Table')
       expect('Small Aluminum Table').to appear_before('Rustic Bronze Lamp')
@@ -82,7 +84,7 @@ describe 'Merchant Items Index' do
   it 'creates a new item' do
     fill_in 'Name', with: 'New Product'
     fill_in 'Description', with: "It's a really great product."
-    fill_in 'Unit price', with: 12345
+    fill_in 'Unit price', with: 12_345
     click_button('Create Item')
 
     expect(current_path).to eq "/merchants/#{@merchant_1.id}/items"
@@ -90,7 +92,7 @@ describe 'Merchant Items Index' do
   end
 
   it 'does not create incomplete items' do
-    fill_in 'Unit price', with: 12345
+    fill_in 'Unit price', with: 12_345
     click_button('Create Item')
 
     expect(current_path).to eq "/merchants/#{@merchant_1.id}/items"
@@ -100,5 +102,4 @@ describe 'Merchant Items Index' do
   it 'lists top items top day' do
     expect(page).to have_content('Top selling date for Small Aluminum Table was: 2021-06-08')
   end
-
 end

@@ -1,16 +1,20 @@
-class Admin::InvoicesController < ApplicationController
-  def index
-    @invoices = Invoice.all
-  end
+# frozen_string_literal: true
 
-  def show
-    @invoice = Invoice.find params[:id]
-    @invoice_created_at = @invoice.created_at.strftime("%A, %B %d, %Y")
-  end
+module Admin
+  class InvoicesController < ApplicationController
+    def index
+      @invoices = Invoice.all
+    end
 
-  def update
-    invoice = Invoice.find params[:id]
-    invoice.update(status: params[:status])
-    redirect_to admin_invoice_path(invoice.id)
+    def show
+      @invoice = Invoice.find params[:id]
+      @invoice_created_at = @invoice.created_at.strftime('%A, %B %d, %Y')
+    end
+
+    def update
+      invoice = Invoice.find params[:id]
+      invoice.update(status: params[:status])
+      redirect_to admin_invoice_path(invoice.id)
+    end
   end
 end
