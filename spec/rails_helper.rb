@@ -43,13 +43,14 @@ Shoulda::Matchers.configure do |config|
 end
 
 # Capybara.default_driver = :selenium
+# Capybara.javascript_driver = :selenium_chrome
 # Capybara.default_driver = :selenium_chrome_headless
 # Capybara.default_driver = :selenium_headless
 
 RSpec.configure do |config|
-
-    config.before(:each) do
-    @hash_array = [
+  
+  config.before(:each) do
+  @hash_array = [
       {"login"=>"zachjamesgreen",
       "id"=>7896916,
       "contributions"=>54},
@@ -69,26 +70,25 @@ RSpec.configure do |config|
       "id"=>20480167,
       "contributions"=>50}
     ]
-    class_double('GithubService', :retrieve_stats => @hash_array).as_stubbed_const
-  end
-
-  config.before(:each) do
-    @github_data = {
+    # class_double('GithubService', :retrieve_stats => @hash_array).as_stubbed_const
+      @github_data_2 = {
       "id": 373926639,
       "node_id": "MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=",
-      "name": "lil-esty-shop"}
+      "name": "bulk_discounts"}
 
-    class_double('GithubService', :retrieve_name => @github_data).as_stubbed_const
+      # class_double('GithubService', :retrieve_pulls => @github_data_2).as_stubbed_const
+        
+      @github_data = {
+          "id": 375818246,
+          "node_id": "MDEwOlJlcG9zaXRvcnkzNzM5MjY2Mzk=",
+          "name": "bulk_discounts"}
+    
+        class_double('GithubService', :retrieve_name => @github_data, :retrieve_pulls => @github_data_2, :retrieve_stats => @hash_array).as_stubbed_const
   end
 
-  config.before(:each) do
-    @github_d = {}
 
-    class_double('GithubService', :retrieve_pulls => @github_d).as_stubbed_const
-  end
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
+    config.fixture_path = "#{::Rails.root}/spec/fixtures"
+    
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

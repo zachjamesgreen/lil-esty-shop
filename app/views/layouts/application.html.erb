@@ -65,7 +65,6 @@
         </div>
       </div>
   </div>
-  <% if !Rails.env.test? %>
     <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
       Pull Requests: <%= GithubService.retrieve_pulls %>
       <div class="card=header text-white bg-dark mb-3" style="max-width: 18rem;"><h3><%= "#{RepoName.repo_name}" %></h3></div>
@@ -75,7 +74,6 @@
         <% commit_hash.each do |login, commits| %>
         <p class="card-text"><%= "Team member: #{login} " %>
           <%= "Has Pushed #{commits} commits"%></p>
-        <% end %></p>
       </div>
     </div>
   <% end %>

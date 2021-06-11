@@ -66,7 +66,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'activerecord-postgres_enum'
-# gem 'autoprefixer-rails'
+gem 'autoprefixer-rails'
 gem 'jquery-rails'
 gem 'webpacker'
 gem 'react-rails'

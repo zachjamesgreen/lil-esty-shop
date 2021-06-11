@@ -1,6 +1,6 @@
 class RepoCommits
   def initialize
-    @ids = [7896916, 77814101, 20480167, 60951642]
+    @ids = [77814101]
     @hash_array = GithubService.retrieve_stats
   end
 

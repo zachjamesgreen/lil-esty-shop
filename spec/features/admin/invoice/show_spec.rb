@@ -22,7 +22,7 @@ RSpec.describe 'Admin Invoice Show' do
     expect(page).to have_content(customer.last_name)
   end
 
-  it 'updates an invoice' do
+  xit 'updates an invoice' do
     invoice = Invoice.first
     visit "/admin/invoices/#{invoice.id}"
 

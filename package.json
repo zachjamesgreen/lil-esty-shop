@@ -2,7 +2,7 @@
   "name": "little-etsy-shop",
   "private": true,
   "dependencies": {
-    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-react": "^7.14.5",
     "@rails/webpacker": "5.4.0",
     "axios": "^0.21.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
